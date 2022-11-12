@@ -35,7 +35,7 @@ class App {
     this.initializeRoutes()
     this.initializeSwagger()
     this.initializeErrorHandling()
-    // this.register404Page();
+    this.register404Page()
   }
 
   public listen() {

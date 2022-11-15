@@ -26,8 +26,8 @@ class UserRepository extends BaseRepository<User> implements UserRepositoryInter
       "SELECT * FROM `users` WHERE email = '" + email + "' and  password = '" + password + "'",
       { type: QueryTypes.SELECT },
     )
-    console.log(customer)
-    if (isEmpty(customer)) {
+    console.log(isEmpty(customer))
+    if (!isEmpty(customer)) {
       return customer
     } else {
       return await DB.sequelize.query(

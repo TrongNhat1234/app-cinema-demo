@@ -6,7 +6,6 @@ export interface ApiResponse {
   code: number
   data: any
   message: string
-  stack: string
 }
 
 export interface AuthRequest extends Request {

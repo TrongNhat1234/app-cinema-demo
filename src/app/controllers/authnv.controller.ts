@@ -1,3 +1,4 @@
+import { isEmpty } from './../../common/utils/util'
 import { NhanVien } from '@models/entities/nhanvien.entity'
 import { NextFunction, Response, Request } from 'express'
 import { LoginDto } from '../../dtos/auth.dto'
@@ -28,6 +29,7 @@ class AuthNvController extends BaseController {
 
       const data = await this.authnvRepository.findByEmailPassWord(email, password)
       const nhanvien = data[0]
+
       console.log(nhanvien)
       // if (data[1] == true) {
       //   // Create a new collection for new user
@@ -38,16 +40,17 @@ class AuthNvController extends BaseController {
       const refreshToken = createRefreshToken(nhanvien)
       // Save to redisnonce
       setCacheExpire(`auth_refresh_email_${email}`, refreshToken, REFRESH_TTL)
-
       return this.setData({
-        accessToken,
-        refreshToken,
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        role: nhanvien?.vaiTro,
       })
         .setCode(200)
         .setMessage('Success')
         .responseSuccess(res)
     } catch (error) {
-      return this.setCode(error?.status || 500)
+      return this.setData({})
+        .setCode(error?.status || 500)
         .setMessage(error?.message || 'Internal server error')
         .responseErrors(res)
     }

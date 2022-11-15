@@ -1,4 +1,4 @@
-import User from '@models/entities/user.entity'
+import NhanVien from '@models/entities/nhanvien.entity'
 import { IAccessToken, IRefreshToken } from '@interfaces/token.interface'
 import jwt from 'jsonwebtoken'
 import { env } from '@env'
@@ -15,10 +15,10 @@ const createAccessToken = (email: string) => {
   )
 }
 
-const createRefreshToken = (user: User): string => {
+const createRefreshToken = (nhanvien: NhanVien): string => {
   return jwt.sign(
     {
-      id: user.id,
+      id: nhanvien.id,
     },
     env.app.jwt_secret as jwt.Secret,
     {

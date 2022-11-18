@@ -7,23 +7,21 @@ import {
   Table,
   UpdatedAt,
 } from 'sequelize-typescript'
+import GheNgoi from './ghengoi.entity'
 
 @Table({
-  tableName: 'users',
+  tableName: 'loaighes',
 })
-export default class User extends Model<User> {
+export default class LoaiGhe extends Model<LoaiGhe> {
   @PrimaryKey
   @Column
   id!: number
 
   @Column
-  name: string
+  tenGhe: string
 
-  @Column
-  email!: string
-
-  @Column
-  password!: string
+  @HasMany(() => GheNgoi, 'gheid')
+  ghengois!: GheNgoi[]
 
   @Column
   isDelete!: boolean
@@ -37,4 +35,4 @@ export default class User extends Model<User> {
   updatedAt!: Date
 }
 
-export { User }
+export { LoaiGhe }

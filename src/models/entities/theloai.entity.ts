@@ -6,24 +6,24 @@ import {
   PrimaryKey,
   Table,
   UpdatedAt,
+  BelongsToMany,
 } from 'sequelize-typescript'
+import Phim from './phim.entity'
+import TheLoaiPhim from './theloaiphim.entity'
 
 @Table({
-  tableName: 'users',
+  tableName: 'theloais',
 })
-export default class User extends Model<User> {
+export default class TheLoai extends Model<TheLoai> {
   @PrimaryKey
   @Column
   id!: number
 
   @Column
-  name: string
+  tenTheLoai!: string
 
-  @Column
-  email!: string
-
-  @Column
-  password!: string
+  @BelongsToMany(() => Phim, () => TheLoaiPhim)
+  phims: Phim[]
 
   @Column
   isDelete!: boolean
@@ -37,4 +37,4 @@ export default class User extends Model<User> {
   updatedAt!: Date
 }
 
-export { User }
+export { TheLoai }

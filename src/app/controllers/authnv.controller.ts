@@ -28,7 +28,7 @@ class AuthNvController extends BaseController {
       const { email, password } = loginDto
 
       const data = await this.authnvRepository.findByEmailPassWord(email, password)
-      const nhanvien = data[0]
+      const nhanvien: NhanVien = data[0]
 
       console.log(nhanvien)
       // if (data[1] == true) {

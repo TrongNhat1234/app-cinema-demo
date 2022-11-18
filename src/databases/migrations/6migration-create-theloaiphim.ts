@@ -1,25 +1,23 @@
 module.exports = {
   up: async (QueryInterface, Sequelize) => {
-    await QueryInterface.createTable('users', {
-      id: {
+    await QueryInterface.createTable('theloaiphims', {
+      idPhim: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
+        references: {
+          model: 'phims',
+          key: 'id',
+        },
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      email: {
-        type: Sequelize.STRING,
+      idTheLoai: {
         allowNull: false,
-        unique: true,
-      },
-
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'theloais',
+          key: 'id',
+        },
       },
 
       isDelete: {
@@ -42,15 +40,7 @@ module.exports = {
         defaultValue: new Date(),
       },
     })
-
-    await Promise.all([
-      QueryInterface.addIndex('users', ['email'], {
-        name: ['users', 'email', 'unique'].join('_'),
-        indicesType: 'unique',
-        type: 'unique',
-      }),
-    ])
   },
 
-  down: async (queryInterface) => queryInterface.dropTable('users'),
+  down: async (queryInterface) => queryInterface.dropTable('theloaiphims'),
 }

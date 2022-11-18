@@ -4,9 +4,12 @@ import {
   HasMany,
   Model,
   PrimaryKey,
+  BelongsToMany,
   Table,
   UpdatedAt,
 } from 'sequelize-typescript'
+import CaLam from './calam.entity'
+import CaLamNhanVien from './calamnhanvien.entity'
 
 @Table({
   tableName: 'nhanviens',
@@ -39,6 +42,12 @@ export default class NhanVien extends Model<NhanVien> {
 
   @Column
   vaiTro!: string
+
+  @BelongsToMany(() => CaLam, () => CaLamNhanVien)
+  calams: CaLam[]
+
+  @Column
+  isDelete!: boolean
 
   @CreatedAt
   @Column

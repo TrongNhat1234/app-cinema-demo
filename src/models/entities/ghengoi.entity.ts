@@ -11,6 +11,7 @@ import {
 } from 'sequelize-typescript'
 import LoaiGhe from './loaighe.entity'
 import PhongChieu from './phongchieu.entity'
+import VeBan from './veban.entity'
 
 @Table({
   tableName: 'ghengois',
@@ -42,6 +43,9 @@ export default class GheNgoi extends Model<GheNgoi> {
 
   @BelongsTo(() => PhongChieu, 'idPhongChieu')
   phongchieu!: PhongChieu
+
+  @HasMany(() => VeBan, 'idGheNgoi')
+  vebans!: VeBan[]
 
   @Column
   isDelete!: boolean

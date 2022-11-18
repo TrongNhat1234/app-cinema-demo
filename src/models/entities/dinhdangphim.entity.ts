@@ -1,3 +1,4 @@
+import { timestamp } from 'aws-sdk/clients/cloudfront'
 import {
   Column,
   CreatedAt,
@@ -5,26 +6,23 @@ import {
   Model,
   PrimaryKey,
   Table,
+  BelongsToMany,
   UpdatedAt,
 } from 'sequelize-typescript'
-import GheNgoi from './ghengoi.entity'
 import XuatChieu from './xuatchieu.entity'
 
 @Table({
-  tableName: 'phongchieus',
+  tableName: 'dinhdangphims',
 })
-export default class PhongChieu extends Model<PhongChieu> {
+export default class DinhDangPhim extends Model<DinhDangPhim> {
   @PrimaryKey
   @Column
   id!: number
 
   @Column
-  tenPhongChieu: string
+  tenDinhDang!: string
 
-  @HasMany(() => GheNgoi, 'idPhongChieu')
-  ghengois!: GheNgoi[]
-
-  @HasMany(() => XuatChieu, 'idPhongChieu')
+  @HasMany(() => XuatChieu, 'idDinhDangPhim')
   xuatchieus!: XuatChieu[]
 
   @Column
@@ -39,4 +37,4 @@ export default class PhongChieu extends Model<PhongChieu> {
   updatedAt!: Date
 }
 
-export { PhongChieu }
+export { DinhDangPhim }

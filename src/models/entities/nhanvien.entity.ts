@@ -10,6 +10,7 @@ import {
 } from 'sequelize-typescript'
 import CaLam from './calam.entity'
 import CaLamNhanVien from './calamnhanvien.entity'
+import VeBan from './veban.entity'
 
 @Table({
   tableName: 'nhanviens',
@@ -45,6 +46,9 @@ export default class NhanVien extends Model<NhanVien> {
 
   @BelongsToMany(() => CaLam, () => CaLamNhanVien)
   calams: CaLam[]
+
+  @HasMany(() => VeBan, 'idNhanVien')
+  vebans!: VeBan[]
 
   @Column
   isDelete!: boolean

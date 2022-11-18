@@ -35,7 +35,7 @@ module.exports = {
   async down(queryInterface) {
     return [
       await queryInterface.bulkDelete('phongchieus', {
-        id: phongchieus.map((ghengoi) => ghengoi.id),
+        id: phongchieus.map((phongchieu) => phongchieu.id),
       }),
     ]
   },

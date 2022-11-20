@@ -18,13 +18,13 @@ export default class LoaiGhe extends Model<LoaiGhe> {
   id!: number
 
   @Column
-  tenGhe: string
+  ten_ghe: string
 
-  @HasMany(() => GheNgoi, 'gheid')
+  @HasMany(() => GheNgoi)
   ghengois!: GheNgoi[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

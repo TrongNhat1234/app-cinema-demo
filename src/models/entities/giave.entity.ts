@@ -20,13 +20,13 @@ export default class GiaVe extends Model<GiaVe> {
   id!: number
 
   @Column
-  giaVe!: number
+  gia_ve!: number
 
-  @HasMany(() => VeBan, 'idGiaVe')
+  @HasMany(() => VeBan)
   ves: VeBan[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

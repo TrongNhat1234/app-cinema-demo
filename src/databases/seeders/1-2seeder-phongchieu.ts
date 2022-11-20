@@ -3,27 +3,27 @@ const wrapValuesWithDateTime3 = require('../utils/wrapValuesWithDateTime.ts')
 const phongchieus = [
   {
     id: 1,
-    tenPhongChieu: 'phongchieu01',
+    ten_phong_chieu: 'phongchieu01',
   },
   {
     id: 2,
-    tenPhongChieu: 'phongchieu02',
+    ten_phong_chieu: 'phongchieu02',
   },
   {
     id: 3,
-    tenPhongChieu: 'phongchieu03',
+    ten_phong_chieu: 'phongchieu03',
   },
   {
     id: 4,
-    tenPhongChieu: 'phongchieu04',
+    ten_phong_chieu: 'phongchieu04',
   },
   {
     id: 5,
-    tenPhongChieu: 'phongchieu05',
+    ten_phong_chieu: 'phongchieu05',
   },
   {
     id: 6,
-    tenPhongChieu: 'phongchieu06',
+    ten_phong_chieu: 'phongchieu06',
   },
 ]
 

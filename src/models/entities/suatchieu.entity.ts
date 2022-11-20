@@ -17,45 +17,45 @@ import PhongChieu from './phongchieu.entity'
 import VeBan from './veban.entity'
 
 @Table({
-  tableName: 'xuatchieus',
+  tableName: 'suatchieus',
 })
-export default class XuatChieu extends Model<XuatChieu> {
+export default class SuatChieu extends Model<SuatChieu> {
   @PrimaryKey
   @Column
   id!: number
 
   @Column
-  gioBatDau!: timestamp
+  gio_bat_dau!: Date
 
   @Column
-  gioKetThuc!: timestamp
+  gio_ket_thuc!: Date
 
   @ForeignKey(() => Phim)
   @Column
-  idPhim!: number
+  id_phim!: number
 
-  @BelongsTo(() => Phim, 'idPhim')
+  @BelongsTo(() => Phim)
   phim: Phim
 
   @ForeignKey(() => PhongChieu)
   @Column
-  idPhongChieu!: number
+  id_phong_chieu!: number
 
-  @BelongsTo(() => PhongChieu, 'idPhongChieu')
+  @BelongsTo(() => PhongChieu)
   phongchieu: PhongChieu
 
   @ForeignKey(() => DinhDangPhim)
   @Column
-  idDinhDangPhim!: number
+  id_dinh_dang_phim!: number
 
-  @BelongsTo(() => DinhDangPhim, 'idDinhDangPhim')
+  @BelongsTo(() => DinhDangPhim)
   dinhdangphim: DinhDangPhim
 
-  @HasMany(() => VeBan, 'idVeBan')
+  @HasMany(() => VeBan)
   vebans!: VeBan[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column
@@ -66,4 +66,4 @@ export default class XuatChieu extends Model<XuatChieu> {
   updatedAt!: Date
 }
 
-export { XuatChieu }
+export { SuatChieu }

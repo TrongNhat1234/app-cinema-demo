@@ -1,7 +1,7 @@
 module.exports = {
   up: async (QueryInterface, Sequelize) => {
     await QueryInterface.createTable('hoadonchitiets', {
-      idHoaDonDoAn: {
+      id_hoa_don_do_an: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
@@ -10,7 +10,7 @@ module.exports = {
           key: 'id',
         },
       },
-      idDoAn: {
+      id_do_an: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
@@ -20,13 +20,13 @@ module.exports = {
         },
       },
 
-      soLuong: {
+      so_luong: {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 1,
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

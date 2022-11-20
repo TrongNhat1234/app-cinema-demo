@@ -1,4 +1,3 @@
-import { timestamp } from 'aws-sdk/clients/cloudfront'
 import {
   Column,
   CreatedAt,
@@ -21,16 +20,16 @@ export default class CaLam extends Model<CaLam> {
   id!: number
 
   @Column
-  gioBatDau!: timestamp
+  gio_bat_dau!: Date
 
   @Column
-  gioKetThuc!: timestamp
+  gio_ket_thuc!: Date
 
   @BelongsToMany(() => NhanVien, () => CaLamNhanVien)
   nhanviens: NhanVien[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

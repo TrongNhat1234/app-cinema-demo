@@ -20,28 +20,28 @@ export default class KhachHang extends Model<KhachHang> {
   id!: number
 
   @Column
-  tenKhachHang: string
+  ten_khach_hang: string
 
   @Column
   email: string
 
   @Column
-  diaChi: string
+  dia_chi: string
 
   @Column
-  soDienThoai!: string
+  so_dien_thoai!: string
 
   @Column
-  matKhau!: string
+  mat_khau!: string
 
   @Column
-  ngaySinh: Date
+  ngay_sinh: Date
 
-  @HasMany(() => VeBan, 'idKhachHang')
+  @HasMany(() => VeBan, 'id_khachhang')
   ves: VeBan[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

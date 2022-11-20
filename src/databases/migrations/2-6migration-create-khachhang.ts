@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      tenKhachHang: {
+      ten_khach_hang: {
         type: Sequelize.STRING,
         allowNull: true,
       },
@@ -17,27 +17,27 @@ module.exports = {
         allowNull: true,
       },
 
-      diaChi: {
+      dia_chi: {
         type: Sequelize.STRING,
         allowNull: true,
       },
 
-      soDienThoai: {
+      so_dien_thoai: {
         type: Sequelize.STRING,
         allowNull: false,
       },
 
-      matKhau: {
+      mat_khau: {
         type: Sequelize.STRING,
         allowNull: false,
       },
 
-      ngaySinh: {
+      ngay_sinh: {
         type: Sequelize.DATEONLY,
         allowNull: true,
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

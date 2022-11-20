@@ -3,18 +3,18 @@ const wrapValuesWithDateTime13 = require('../utils/wrapValuesWithDateTime.ts')
 const hoadondoans = [
   {
     id: 1,
-    giamgia: 0.5,
-    tongTien: 50000,
+    giam_gia: 0.5,
+    tong_tien: 50000,
   },
   {
     id: 2,
-    giamgia: 0.5,
-    tongTien: 40000,
+    giam_gia: 0.5,
+    tong_tien: 40000,
   },
   {
     id: 3,
-    giamgia: 0.1,
-    tongTien: 90000,
+    giam_gia: 0.1,
+    tong_tien: 90000,
   },
 ]
 

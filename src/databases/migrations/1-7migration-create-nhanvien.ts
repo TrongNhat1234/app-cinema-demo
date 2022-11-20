@@ -7,16 +7,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      hoTen: {
+      ho_ten: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      ngaySinh: {
+      ngay_sinh: {
         type: Sequelize.DATEONLY,
         allowNull: true,
       },
 
-      diaChi: {
+      dia_chi: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -26,25 +26,25 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      ngayVaoLam: {
+      ngay_vao_lam: {
         type: Sequelize.DATEONLY,
         allowNull: true,
       },
 
-      gioiTinh: {
+      gioi_tinh: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
       },
-      matKhau: {
+      mat_khau: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      vaiTro: {
+      vai_tro: {
         type: Sequelize.STRING,
         allowNull: false,
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

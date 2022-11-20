@@ -9,7 +9,7 @@ import {
   BelongsToMany,
   UpdatedAt,
 } from 'sequelize-typescript'
-import XuatChieu from './xuatchieu.entity'
+import SuatChieu from './suatchieu.entity'
 
 @Table({
   tableName: 'dinhdangphims',
@@ -20,13 +20,13 @@ export default class DinhDangPhim extends Model<DinhDangPhim> {
   id!: number
 
   @Column
-  tenDinhDang!: string
+  ten_dinh_dang!: string
 
-  @HasMany(() => XuatChieu, 'idDinhDangPhim')
-  xuatchieus!: XuatChieu[]
+  @HasMany(() => SuatChieu)
+  suatchieus!: SuatChieu[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

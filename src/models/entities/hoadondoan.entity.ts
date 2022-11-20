@@ -20,19 +20,19 @@ export default class DoAn extends Model<DoAn> {
   id!: number
 
   @Column
-  ngayBan!: Date
+  ngay_ban!: Date
 
   @Column
-  giamGia!: number
+  giam_gia!: number
 
   @Column
-  tongTien!: number
+  tong_tien!: number
 
   @BelongsToMany(() => DoAn, () => HoaDonChiTiet)
   doans: DoAn[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

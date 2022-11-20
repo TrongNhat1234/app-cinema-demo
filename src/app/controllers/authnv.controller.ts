@@ -26,8 +26,9 @@ class AuthNvController extends BaseController {
     try {
       const loginDto: LoginDto = req.body
       const { email, password } = loginDto
-
+      console.log(loginDto)
       const data = await this.authnvRepository.findByEmailPassWord(email, password)
+      console.log(data)
       const nhanvien: NhanVien = data[0]
 
       console.log(nhanvien)
@@ -43,7 +44,7 @@ class AuthNvController extends BaseController {
       return this.setData({
         accessToken: accessToken,
         refreshToken: refreshToken,
-        role: nhanvien?.vaiTro,
+        role: nhanvien?.vai_tro,
       })
         .setCode(200)
         .setMessage('Success')

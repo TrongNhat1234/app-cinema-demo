@@ -19,7 +19,6 @@ import { env } from '@env'
 import { client as RedisClient } from '@services/redis'
 import { Action } from 'routing-controllers'
 import { verifyToken } from '@utils/token'
-import User from '@models/entities/user.entity'
 
 class App {
   public app: express.Application = express()
@@ -35,7 +34,7 @@ class App {
     this.initializeRoutes()
     this.initializeSwagger()
     this.initializeErrorHandling()
-    this.register404Page()
+    // this.register404Page();
   }
 
   public listen() {

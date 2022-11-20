@@ -2,31 +2,31 @@ const wrapValuesWithDateTime14 = require('../utils/wrapValuesWithDateTime.ts')
 
 const hoadonchitiets = [
   {
-    idDoAn: 1,
-    idHoaDonDoAn: 1,
-    soLuong: 1,
+    id_do_an: 1,
+    id_hoa_don_do_an: 1,
+    so_luong: 1,
   },
 
   {
-    idDoAn: 7,
-    idHoaDonDoAn: 1,
-    soLuong: 2,
+    id_do_an: 7,
+    id_hoa_don_do_an: 1,
+    so_luong: 2,
   },
   {
-    idDoAn: 2,
-    idHoaDonDoAn: 2,
-    soLuong: 1,
+    id_do_an: 2,
+    id_hoa_don_do_an: 2,
+    so_luong: 1,
   },
 
   {
-    idDoAn: 8,
-    idHoaDonDoAn: 2,
-    soLuong: 1,
+    id_do_an: 8,
+    id_hoa_don_do_an: 2,
+    so_luong: 1,
   },
   {
-    idDoAn: 8,
-    idHoaDonDoAn: 3,
-    soLuong: 2,
+    id_do_an: 8,
+    id_hoa_don_do_an: 3,
+    so_luong: 2,
   },
 ]
 
@@ -41,7 +41,7 @@ module.exports = {
     return [
       await queryInterface.bulkDelete('hoadonchitiets', {
         id: hoadonchitiets.map((hoadonchitiet) => {
-          hoadonchitiet.idDoAn, hoadonchitiet.idHoaDonDoAn
+          hoadonchitiet.id_do_an, hoadonchitiet.id_hoa_don_do_an
         }),
       }),
     ]

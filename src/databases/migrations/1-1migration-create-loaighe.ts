@@ -7,12 +7,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      tenGhe: {
+      ten_ghe: {
         type: Sequelize.STRING,
         allowNull: false,
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

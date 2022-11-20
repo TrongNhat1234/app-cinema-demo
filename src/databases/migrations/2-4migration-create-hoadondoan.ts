@@ -7,25 +7,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      ngayBan: {
+      ngay_ban: {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: new Date(),
       },
 
-      giamGia: {
+      giam_gia: {
         type: Sequelize.FLOAT,
         allowNull: false,
         defaultValue: 0,
       },
 
-      tongTien: {
+      tong_tien: {
         type: Sequelize.FLOAT,
         allowNull: false,
         defaultValue: 0,
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

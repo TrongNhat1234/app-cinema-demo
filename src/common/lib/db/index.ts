@@ -2,6 +2,8 @@ import { ModelCtor } from 'sequelize-typescript'
 
 import DB from '@models/index'
 import LoaiGhe from '@models/entities/loaighe.entity'
+import User from '@models/entities/user.entity'
+
 import PhongChieu from '@models/entities/phongchieu.entity'
 import GheNgoi from '@models/entities/ghengoi.entity'
 import Phim from '@models/entities/phim.entity'
@@ -11,7 +13,7 @@ import NhanVien from '@models/entities/nhanvien.entity'
 import CaLam from '@models/entities/calam.entity'
 import CaLamNhanVien from '@models/entities/calamnhanvien.entity'
 import DinhDangPhim from '@models/entities/dinhdangphim.entity'
-import XuatChieu from '@models/entities/xuatchieu.entity'
+import XuatChieu from '@models/entities/suatchieu.entity'
 import DoAn from '@models/entities/doan.entity'
 import HoaDonDoAn from '@models/entities/hoadondoan.entity'
 import HoaDonChiTiet from '@models/entities/hoadonchitiet.entity'
@@ -22,6 +24,9 @@ import VeBan from '@models/entities/veban.entity'
 export function getModelFromTableName(tableName: string): ModelCtor | undefined {
   let item = undefined
   switch (tableName) {
+    case User.tableName:
+      item = DB.sequelize.model(User)
+      break
     case LoaiGhe.tableName:
       item = DB.sequelize.model(LoaiGhe)
       break

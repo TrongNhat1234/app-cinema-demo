@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      tenDoAn: {
+      ten_do_an: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

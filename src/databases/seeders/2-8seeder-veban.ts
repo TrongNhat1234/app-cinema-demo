@@ -3,22 +3,22 @@ const wrapValuesWithDateTime17 = require('../utils/wrapValuesWithDateTime.ts')
 const vebans = [
   {
     id: 1,
-    tongTien: 24242.3,
-    idXuatChieu: 1,
-    idGiaVe: 1,
-    idGheNgoi: 3,
-    idNhanVien: 1,
-    idKhachHang: 1,
+    tong_tien: 24242.3,
+    id_suat_chieu: 1,
+    id_gia_ve: 1,
+    id_ghe_ngoi: 3,
+    id_nhan_vien: 1,
+    id_khach_hang: 1,
   },
 
   {
     id: 2,
-    tongTien: 34242.3,
-    idXuatChieu: 2,
-    idGiaVe: 4,
-    idGheNgoi: 1,
-    idNhanVien: 1,
-    idKhachHang: 1,
+    tong_tien: 34242.3,
+    id_suat_chieu: 2,
+    id_gia_ve: 4,
+    id_ghe_ngoi: 1,
+    id_nhan_vien: 1,
+    id_khach_hang: 1,
   },
 ]
 

@@ -26,7 +26,7 @@ class NhanVienRepository
 
   async findByEmailPassWord(email: string, password: string) {
     const nhanvien = await DB.sequelize.query(
-      "SELECT * FROM `nhanviens` WHERE email = '" + email + "' and  matKhau = '" + password + "'",
+      "SELECT * FROM `nhanviens` WHERE email = '" + email + "' and mat_khau = '" + password + "'",
       { type: QueryTypes.SELECT },
     )
     return nhanvien

@@ -7,16 +7,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      gioBatDau: {
+      gio_bat_dau: {
         type: Sequelize.TIME,
         allowNull: false,
       },
-      gioKetThuc: {
+      gio_ket_thuc: {
         type: Sequelize.TIME,
         allowNull: false,
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

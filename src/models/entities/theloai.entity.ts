@@ -20,13 +20,10 @@ export default class TheLoai extends Model<TheLoai> {
   id!: number
 
   @Column
-  tenTheLoai!: string
+  ten_the_loai!: string
 
   @BelongsToMany(() => Phim, () => TheLoaiPhim)
   phims: Phim[]
-
-  @Column
-  isDelete!: boolean
 
   @CreatedAt
   @Column

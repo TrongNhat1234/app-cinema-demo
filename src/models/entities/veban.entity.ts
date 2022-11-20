@@ -11,7 +11,7 @@ import {
   ForeignKey,
   UpdatedAt,
 } from 'sequelize-typescript'
-import XuatChieu from './xuatchieu.entity'
+import SuatChieu from './suatchieu.entity'
 import GiaVe from './giave.entity'
 import NhanVien from './nhanvien.entity'
 import GheNgoi from './ghengoi.entity'
@@ -20,54 +20,54 @@ import KhachHang from './khachhang.entity'
 @Table({
   tableName: 'ves',
 })
-export default class Ve extends Model<Ve> {
+export default class VeBan extends Model<VeBan> {
   @PrimaryKey
   @Column
   id!: number
 
   @Column
-  ngayBan!: Date
+  ngay_ban!: Date
 
   @Column
-  tongTien!: number
+  tong_tien!: number
 
-  @ForeignKey(() => XuatChieu)
+  @ForeignKey(() => SuatChieu)
   @Column
-  idXuatChieu!: number
+  id_suat_chieu!: number
 
-  @BelongsTo(() => XuatChieu, 'idXuatChieu')
-  xuatchieu: XuatChieu
+  @BelongsTo(() => SuatChieu)
+  suatchieu: SuatChieu
 
   @ForeignKey(() => GiaVe)
   @Column
-  idGiaVe!: number
+  id_gia_ve!: number
 
-  @BelongsTo(() => GiaVe, 'idGiaVe')
+  @BelongsTo(() => GiaVe)
   giave: GiaVe
 
   @ForeignKey(() => NhanVien)
   @Column
-  idNhanVien!: number
+  id_nhan_vien!: number
 
-  @BelongsTo(() => NhanVien, 'idNhanVien')
+  @BelongsTo(() => NhanVien)
   nhanvien: NhanVien
 
   @ForeignKey(() => GheNgoi)
   @Column
-  idGheNgoi!: number
+  id_ghe_ngoi!: number
 
-  @BelongsTo(() => GheNgoi, 'idGheNgoi')
+  @BelongsTo(() => GheNgoi)
   ghe: GheNgoi
 
   @ForeignKey(() => KhachHang)
   @Column
-  idKhachHang!: number
+  id_khach_hang!: number
 
-  @BelongsTo(() => KhachHang, 'idKhachHang')
-  khachhang: KhachHang
+  @BelongsTo(() => KhachHang, 'id_khachhang')
+  khach_hang: KhachHang
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column
@@ -78,4 +78,4 @@ export default class Ve extends Model<Ve> {
   updatedAt!: Date
 }
 
-export { Ve }
+export { VeBan }

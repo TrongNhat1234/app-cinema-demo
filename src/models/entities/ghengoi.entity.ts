@@ -22,33 +22,33 @@ export default class GheNgoi extends Model<GheNgoi> {
   id!: number
 
   @Column
-  daySo!: number
+  day_so!: number
 
   @Column
   hangSo!: number
 
   @Column
-  daChon!: boolean
+  da_chon!: boolean
 
   @ForeignKey(() => LoaiGhe)
   @Column
-  idGhe!: number
+  id_ghe!: number
 
-  @BelongsTo(() => LoaiGhe, 'idGhe')
+  @BelongsTo(() => LoaiGhe)
   loaighe!: LoaiGhe
 
   @ForeignKey(() => PhongChieu)
   @Column
-  idPhongChieu!: number
+  id_phong_chieu!: number
 
-  @BelongsTo(() => PhongChieu, 'idPhongChieu')
+  @BelongsTo(() => PhongChieu)
   phongchieu!: PhongChieu
 
-  @HasMany(() => VeBan, 'idGheNgoi')
+  @HasMany(() => VeBan)
   vebans!: VeBan[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

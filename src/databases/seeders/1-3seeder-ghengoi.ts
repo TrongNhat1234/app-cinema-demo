@@ -3,38 +3,38 @@ const wrapValuesWithDateTime4 = require('../utils/wrapValuesWithDateTime.ts')
 const ghengois = [
   {
     id: 1,
-    hangSo: 1,
-    daySo: 1,
-    daChon: true,
-    idPhongChieu: 1,
-    idGhe: 1,
+    hang_so: 1,
+    day_so: 1,
+    da_chon: true,
+    id_phong_chieu: 1,
+    id_ghe: 1,
   },
 
   {
     id: 2,
-    hangSo: 2,
-    daySo: 2,
-    daChon: false,
-    idPhongChieu: 2,
-    idGhe: 2,
+    hang_so: 2,
+    day_so: 2,
+    da_chon: false,
+    id_phong_chieu: 2,
+    id_ghe: 2,
   },
 
   {
     id: 3,
-    hangSo: 3,
-    daySo: 3,
-    daChon: false,
-    idPhongChieu: 1,
-    idGhe: 3,
+    hang_so: 3,
+    day_so: 3,
+    da_chon: false,
+    id_phong_chieu: 1,
+    id_ghe: 3,
   },
 
   {
     id: 4,
-    hangSo: 1,
-    daySo: 4,
-    daChon: false,
-    idPhongChieu: 2,
-    idGhe: 4,
+    hang_so: 1,
+    day_so: 4,
+    da_chon: false,
+    id_phong_chieu: 2,
+    id_ghe: 4,
   },
 ]
 

@@ -7,29 +7,29 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      tenPhim: {
+      ten_phim: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      thoiLuongPhim: {
+      thoi_luong_phim: {
         type: Sequelize.TIME,
         allowNull: false,
       },
 
-      gioiHanTuoi: {
+      gioi_han_tuoi: {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
-      ngayCongChieu: {
+      ngay_cong_chieu: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      trangThai: {
+      trang_thai: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

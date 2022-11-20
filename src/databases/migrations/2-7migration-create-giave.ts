@@ -8,12 +8,12 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
 
-      giaVe: {
+      gia_ve: {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

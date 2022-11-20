@@ -18,17 +18,17 @@ import DoAn from './doan.entity'
 export default class HoaDonChiTiet extends Model<HoaDonChiTiet> {
   @ForeignKey(() => HoaDonDoAn)
   @Column
-  idHoaDon: number
+  id_hoa_don: number
 
   @ForeignKey(() => DoAn)
   @Column
-  idDoAn: number
+  id_do_an: number
 
   @Column
-  soLuong: number
+  so_luong: number
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

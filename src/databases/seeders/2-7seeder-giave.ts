@@ -3,23 +3,23 @@ const wrapValuesWithDateTime16 = require('../utils/wrapValuesWithDateTime.ts')
 const giaves = [
   {
     id: 1,
-    giaVe: 23710,
+    gia_ve: 23710,
   },
   {
     id: 2,
-    giaVe: 543543,
+    gia_ve: 543543,
   },
   {
     id: 3,
-    giaVe: 546,
+    gia_ve: 546,
   },
   {
     id: 4,
-    giaVe: 534534,
+    gia_ve: 534534,
   },
   {
     id: 5,
-    giaVe: 40000,
+    gia_ve: 40000,
   },
 ]
 

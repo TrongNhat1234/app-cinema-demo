@@ -18,14 +18,14 @@ import CaLam from './calam.entity'
 export default class CaLamNhanVien extends Model<CaLamNhanVien> {
   @ForeignKey(() => NhanVien)
   @Column
-  idNhanVien: number
+  id_nhan_vien: number
 
   @ForeignKey(() => CaLam)
   @Column
-  idCaLam: number
+  id_ca_lam: number
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

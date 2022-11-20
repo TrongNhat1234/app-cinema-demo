@@ -7,11 +7,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      tenDinhDang: {
+      ten_dinh_dang: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

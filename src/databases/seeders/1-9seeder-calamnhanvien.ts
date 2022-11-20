@@ -2,18 +2,18 @@ const wrapValuesWithDateTime9 = require('../utils/wrapValuesWithDateTime.ts')
 
 const calamnhanviens = [
   {
-    idNhanVien: 1,
-    idCaLam: 1,
+    id_nhan_vien: 1,
+    id_ca_lam: 1,
   },
 
   {
-    idNhanVien: 1,
-    idCaLam: 2,
+    id_nhan_vien: 1,
+    id_ca_lam: 2,
   },
 
   {
-    idNhanVien: 2,
-    idCaLam: 1,
+    id_nhan_vien: 2,
+    id_ca_lam: 1,
   },
 ]
 
@@ -28,7 +28,7 @@ module.exports = {
     return [
       await queryInterface.bulkDelete('calamnhanviens', {
         id: calamnhanviens.map((calamnhanvien) => {
-          calamnhanvien.idNhanVien, calamnhanvien.idCaLam
+          calamnhanvien.id_nhan_vien, calamnhanvien.id_ca_lam
         }),
       }),
     ]

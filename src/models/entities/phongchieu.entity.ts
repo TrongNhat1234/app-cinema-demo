@@ -8,7 +8,7 @@ import {
   UpdatedAt,
 } from 'sequelize-typescript'
 import GheNgoi from './ghengoi.entity'
-import XuatChieu from './xuatchieu.entity'
+import SuatChieu from './suatchieu.entity'
 
 @Table({
   tableName: 'phongchieus',
@@ -19,16 +19,16 @@ export default class PhongChieu extends Model<PhongChieu> {
   id!: number
 
   @Column
-  tenPhongChieu: string
+  ten_phong_chieu: string
 
-  @HasMany(() => GheNgoi, 'idPhongChieu')
+  @HasMany(() => GheNgoi)
   ghengois!: GheNgoi[]
 
-  @HasMany(() => XuatChieu, 'idPhongChieu')
-  xuatchieus!: XuatChieu[]
+  @HasMany(() => SuatChieu)
+  suatchieus!: SuatChieu[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

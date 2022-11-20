@@ -7,17 +7,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      tenTheLoai: {
+      ten_the_loai: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,
       },
-
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

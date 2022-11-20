@@ -1,4 +1,5 @@
 import { timestamp } from 'aws-sdk/clients/cloudfront'
+import { Time } from 'aws-sdk/clients/codedeploy'
 import {
   BelongsToMany,
   Column,
@@ -11,7 +12,7 @@ import {
 } from 'sequelize-typescript'
 import TheLoai from './theloai.entity'
 import TheLoaiPhim from './theloaiphim.entity'
-import XuatChieu from './xuatchieu.entity'
+import SuatChieu from './suatchieu.entity'
 
 @Table({
   tableName: 'phims',
@@ -22,28 +23,28 @@ export default class Phim extends Model<Phim> {
   id!: number
 
   @Column
-  tenPhim!: string
+  ten_phim!: string
 
   @Column
-  thoiLuongPhim!: timestamp
+  thoi_luong_phim!: Date
 
   @Column
-  gioiHanTuoi: number
+  gioi_han_tuoi: number
 
   @Column
-  ngayCongChieu!: Date
+  ngay_cong_chieu!: Date
 
   @Column
-  trangThai!: boolean
+  trang_thai!: boolean
 
   @BelongsToMany(() => TheLoai, () => TheLoaiPhim)
   theloais: TheLoai[]
 
-  @HasMany(() => XuatChieu, 'idPhim')
-  xuatchieus!: XuatChieu[]
+  @HasMany(() => SuatChieu)
+  suatchieus!: SuatChieu[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column
@@ -54,4 +55,4 @@ export default class Phim extends Model<Phim> {
   updatedAt!: Date
 }
 
-export { TheLoai }
+export { Phim }

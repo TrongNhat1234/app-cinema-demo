@@ -2,33 +2,33 @@ const wrapValuesWithDateTime7 = require('../utils/wrapValuesWithDateTime.ts')
 
 const theloaiphims = [
   {
-    idPhim: 1,
-    idTheLoai: 1,
+    id_phim: 1,
+    id_the_loai: 1,
   },
 
   {
-    idPhim: 1,
-    idTheLoai: 2,
+    id_phim: 1,
+    id_the_loai: 2,
   },
 
   {
-    idPhim: 2,
-    idTheLoai: 5,
+    id_phim: 2,
+    id_the_loai: 5,
   },
 
   {
-    idPhim: 2,
-    idTheLoai: 2,
+    id_phim: 2,
+    id_the_loai: 2,
   },
 
   {
-    idPhim: 2,
-    idTheLoai: 4,
+    id_phim: 2,
+    id_the_loai: 4,
   },
 
   {
-    idPhim: 3,
-    idTheLoai: 5,
+    id_phim: 3,
+    id_the_loai: 5,
   },
 ]
 
@@ -41,7 +41,7 @@ module.exports = {
     return [
       await queryInterface.bulkDelete('theloaiphims', {
         id: theloaiphims.map((theloaiphim) => {
-          theloaiphim.idPhim, theloaiphim.idTheLoai
+          theloaiphim.id_phim, theloaiphim.id_the_loai
         }),
       }),
     ]

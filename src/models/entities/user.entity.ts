@@ -9,24 +9,19 @@ import {
 } from 'sequelize-typescript'
 
 @Table({
-  tableName: 'users',
+  tableName: 'loginadmins',
 })
-export default class User extends Model<User> {
+export default class LoginAdmin extends Model<LoginAdmin> {
   @PrimaryKey
   @Column
   id!: number
 
   @Column
-  name: string
-
-  @Column
   email!: string
-
+  @Column
+  is_delete!: boolean
   @Column
   password!: string
-
-  @Column
-  isDelete!: boolean
 
   @CreatedAt
   @Column
@@ -37,4 +32,4 @@ export default class User extends Model<User> {
   updatedAt!: Date
 }
 
-export { User }
+export { LoginAdmin }

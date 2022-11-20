@@ -7,22 +7,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      daySo: {
+      day_so: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      hangSo: {
+      hang_so: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      daChon: {
+      da_chon: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
 
-      idPhongChieu: {
+      id_phong_chieu: {
         type: Sequelize.INTEGER,
-        field: 'idPhongChieu',
+        field: 'id_phong_chieu',
         allowNull: true,
         onDelete: 'CASCADE',
         onUpdate: 'SET NULL',
@@ -32,9 +32,9 @@ module.exports = {
         },
       },
 
-      idGhe: {
+      id_ghe: {
         type: Sequelize.INTEGER,
-        field: 'idGhe',
+        field: 'id_ghe',
         allowNull: true,
         onDelete: 'CASCADE',
         onUpdate: 'SET NULL',
@@ -44,7 +44,7 @@ module.exports = {
         },
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

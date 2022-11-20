@@ -3,32 +3,32 @@ const wrapValuesWithDateTime6 = require('../utils/wrapValuesWithDateTime.ts')
 const theloais = [
   {
     id: 1,
-    tenTheLoai: 'Bom tấn',
+    ten_the_loai: 'Bom tấn',
   },
 
   {
     id: 2,
-    tenTheLoai: 'Gia đình',
+    ten_the_loai: 'Gia đình',
   },
 
   {
     id: 3,
-    tenTheLoai: 'Kinh dị',
+    ten_the_loai: 'Kinh dị',
   },
 
   {
     id: 4,
-    tenTheLoai: 'Hài hước',
+    ten_the_loai: 'Hài hước',
   },
 
   {
     id: 5,
-    tenTheLoai: 'Viễn tưởng',
+    ten_the_loai: 'Viễn tưởng',
   },
 
   {
     id: 6,
-    tenTheLoai: 'Phiêu lưu',
+    ten_the_loai: 'Phiêu lưu',
   },
 ]
 

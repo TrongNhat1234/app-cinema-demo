@@ -21,37 +21,37 @@ export default class NhanVien extends Model<NhanVien> {
   id!: number
 
   @Column
-  hoTen!: string
+  ho_ten!: string
 
   @Column
-  ngaySinh: Date
+  ngay_sinh: Date
 
   @Column
-  diaChi: string
+  dia_chi: string
 
   @Column
   email!: string
 
   @Column
-  ngayVaoLam: Date
+  ngay_vao_lam: Date
 
   @Column
-  gioiTinh: boolean
+  gioi_tinh: boolean
 
   @Column
-  matKhau!: string
+  mat_khau!: string
 
   @Column
-  vaiTro!: string
+  vai_tro!: string
 
   @BelongsToMany(() => CaLam, () => CaLamNhanVien)
   calams: CaLam[]
 
-  @HasMany(() => VeBan, 'idNhanVien')
+  @HasMany(() => VeBan)
   vebans!: VeBan[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

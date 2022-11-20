@@ -3,27 +3,27 @@ const wrapValuesWithDateTime2 = require('../utils/wrapValuesWithDateTime.ts')
 const loaighes = [
   {
     id: 1,
-    tenGhe: 'ghe01',
+    ten_ghe: 'ghe01',
   },
   {
     id: 2,
-    tenGhe: 'ghe02',
+    ten_ghe: 'ghe02',
   },
   {
     id: 3,
-    tenGhe: 'ghe03',
+    ten_ghe: 'ghe03',
   },
   {
     id: 4,
-    tenGhe: 'ghe04',
+    ten_ghe: 'ghe04',
   },
   {
     id: 5,
-    tenGhe: 'ghe05',
+    ten_ghe: 'ghe05',
   },
   {
     id: 6,
-    tenGhe: 'ghe06',
+    ten_ghe: 'ghe06',
   },
 ]
 
@@ -35,7 +35,7 @@ module.exports = {
   async down(queryInterface) {
     return [
       await queryInterface.bulkDelete('loaighes', {
-        id: loaighes.map((ghengoi) => ghengoi.id),
+        id: loaighes.map((loaighe) => loaighe.id),
       }),
     ]
   },

@@ -1,7 +1,9 @@
 import { Service } from 'typedi'
 import { ModelCtor, Model } from 'sequelize-typescript'
 import { BaseRepositoryInterface } from './interfaces/base.repository.interface'
-const { QueryTypes, Sequelize } = require('sequelize')
+import { env } from '@env'
+const { QueryTypes } = require('sequelize')
+import DB from '@models/index'
 
 @Service()
 export abstract class BaseRepository<M extends Model> implements BaseRepositoryInterface {
@@ -11,13 +13,19 @@ export abstract class BaseRepository<M extends Model> implements BaseRepositoryI
     this.model = model
   }
 
+  modelName = function () {
+    const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
+    return nameModel
+  }
+
   async findById(id: number): Promise<M> {
     return this.model.findByPk(id)
   }
 
-  async getAll(): Promise<M[]> {
-    //return this.model.findAll({ raw: true })
-    return await Sequelize.query('SELECT * FROM `users`', { type: QueryTypes.SELECT })
+  async getAll() {
+    return await DB.sequelize.query('SELECT * FROM ' + this.modelName(), {
+      type: QueryTypes.SELECT,
+    })
   }
 
   async getAllAndCount(): Promise<{ rows: M[]; count: number }> {
@@ -42,6 +50,7 @@ export abstract class BaseRepository<M extends Model> implements BaseRepositoryI
   }
 
   async create(object: any): Promise<M> {
+    console.log(this.model)
     return this.model.create(object)
   }
 

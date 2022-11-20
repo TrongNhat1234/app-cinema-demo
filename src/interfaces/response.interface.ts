@@ -1,4 +1,4 @@
-import User from '@models/entities/user.entity'
+import NhanVien from '@models/entities/nhanvien.entity'
 import { Request, Response } from 'express'
 
 export interface ApiResponse {
@@ -9,5 +9,5 @@ export interface ApiResponse {
 }
 
 export interface AuthRequest extends Request {
-  user: User
+  nhanvien: NhanVien
 }

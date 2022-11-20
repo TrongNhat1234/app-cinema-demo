@@ -20,7 +20,7 @@ export default class DoAn extends Model<DoAn> {
   id!: number
 
   @Column
-  tenDoAn!: string
+  ten_do_an!: string
 
   @Column
   size!: string
@@ -32,7 +32,7 @@ export default class DoAn extends Model<DoAn> {
   hoadons: HoaDonDoAn[]
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

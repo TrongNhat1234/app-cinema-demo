@@ -1,22 +1,22 @@
 module.exports = {
   up: async (QueryInterface, Sequelize) => {
-    await QueryInterface.createTable('xuatchieus', {
+    await QueryInterface.createTable('suatchieus', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      gioBatDau: {
+      gio_bat_dau: {
         type: Sequelize.TIME,
         allowNull: false,
       },
-      gioKetThuc: {
+      gio_ket_thuc: {
         type: Sequelize.TIME,
         allowNull: false,
       },
 
-      idPhongChieu: {
+      id_phong_chieu: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
@@ -26,7 +26,7 @@ module.exports = {
         },
       },
 
-      idDinhDangPhim: {
+      id_dinh_dang_phim: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
@@ -36,7 +36,7 @@ module.exports = {
         },
       },
 
-      idPhim: {
+      id_phim: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.INTEGER,
@@ -46,7 +46,7 @@ module.exports = {
         },
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,
@@ -68,5 +68,5 @@ module.exports = {
     })
   },
 
-  down: async (queryInterface) => queryInterface.dropTable('xuatchieus'),
+  down: async (queryInterface) => queryInterface.dropTable('suatchieus'),
 }

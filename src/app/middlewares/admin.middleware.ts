@@ -1,10 +1,10 @@
+import { NhanVien } from '@models/entities/nhanvien.entity'
 import { AuthRequest } from '@interfaces/response.interface'
 import { ExpressMiddlewareInterface } from 'routing-controllers'
 import { Service } from 'typedi'
 import { HttpException } from '@exceptions/http.exception'
 import { IAccessToken } from '@interfaces/token.interface'
 import { verifyToken } from '@utils/token'
-import User from '@models/entities/user.entity'
 import UserType from '@enum/user.enum'
 
 @Service()
@@ -19,14 +19,15 @@ export class AdminMiddleware implements ExpressMiddlewareInterface {
     try {
       const payload = (await verifyToken(accessToken)) as IAccessToken
       console.log(payload)
-      const user = await User.findOne({
+      const admin = await NhanVien.findOne({
         where: {
           email: payload.email,
+          vai_tro: 'admin',
         },
         raw: true,
       })
 
-      request.user = user
+      request.nhanvien = admin
       return next()
     } catch (error) {
       return next(new HttpException(401, 'Unauthorised'))

@@ -7,27 +7,27 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      ngayBan: {
+      ngay_ban: {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: new Date(),
       },
 
-      tongTien: {
+      tong_tien: {
         type: Sequelize.FLOAT,
         allowNull: false,
         defaultValue: 0,
       },
-      idXuatChieu: {
+      id_suat_chieu: {
         allowNull: false,
         foreignKey: true,
         type: Sequelize.INTEGER,
         references: {
-          model: 'xuatchieus',
+          model: 'suatchieus',
           key: 'id',
         },
       },
-      idGiaVe: {
+      id_gia_ve: {
         allowNull: false,
         foreignKey: true,
         type: Sequelize.INTEGER,
@@ -36,27 +36,24 @@ module.exports = {
           key: 'id',
         },
       },
-      idGheNgoi: {
+      id_ghe_ngoi: {
         allowNull: false,
-        foreignKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'ghengois',
           key: 'id',
         },
       },
-      idNhanVien: {
+      id_nhan_vien: {
         allowNull: false,
-        foreignKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'nhanviens',
           key: 'id',
         },
       },
-      idKhachHang: {
+      id_khach_hang: {
         allowNull: false,
-        foreignKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'khachhangs',
@@ -64,7 +61,7 @@ module.exports = {
         },
       },
 
-      isDelete: {
+      is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

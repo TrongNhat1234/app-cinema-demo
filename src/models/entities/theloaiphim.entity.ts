@@ -18,14 +18,14 @@ import TheLoai from './theloai.entity'
 export default class TheLoaiPhim extends Model<TheLoaiPhim> {
   @ForeignKey(() => Phim)
   @Column
-  idPhim: string
+  id_phim: string
 
   @ForeignKey(() => TheLoai)
   @Column
-  idTheLoai: string
+  id_the_loai: string
 
   @Column
-  isDelete!: boolean
+  is_delete!: boolean
 
   @CreatedAt
   @Column

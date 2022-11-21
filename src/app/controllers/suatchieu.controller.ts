@@ -53,6 +53,7 @@ export class SuatChieusController extends BaseController {
   async createSuatChieu(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const data: CreateDto = req.body
+      console.log('data', data)
       const suatchieu = await this.SuatChieuRepository.createSuatChieu(data)
       return this.setData(data).setMessage('Create suatchieus successfully').responseSuccess(res)
     } catch (error) {

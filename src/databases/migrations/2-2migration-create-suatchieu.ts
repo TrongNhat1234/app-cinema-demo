@@ -45,6 +45,12 @@ module.exports = {
           key: 'id',
         },
       },
+      ngay_chieu: {
+        allowNull: false,
+        type: Sequelize.DATEONLY,
+        field: 'ngay_chieu',
+        defaultValue: new Date(),
+      },
 
       is_delete: {
         type: Sequelize.BOOLEAN,

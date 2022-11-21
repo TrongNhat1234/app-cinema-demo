@@ -16,6 +16,11 @@ class TheLoaiRepository
   constructor(@ModelContainer(TheLoai.tableName) TheLoai: ModelCtor<TheLoai>) {
     super(TheLoai)
   }
+
+  modelName = function () {
+    const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
+    return nameModel
+  }
 }
 
 export default TheLoaiRepository

@@ -13,6 +13,11 @@ class PhimRepository extends BaseRepository<Phim> implements PhimRepositoryInter
   constructor(@ModelContainer(Phim.tableName) Phim: ModelCtor<Phim>) {
     super(Phim)
   }
+
+  modelName = function () {
+    const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
+    return nameModel
+  }
 }
 
 export default PhimRepository

@@ -57,6 +57,14 @@ module.exports = {
         defaultValue: new Date(),
       },
     })
+
+    await Promise.all([
+      QueryInterface.addIndex('khachhangs', ['so_dien_thoai'], {
+        name: ['khachhangs', 'so_dien_thoai', 'unique'].join('_'),
+        indicesType: 'unique',
+        type: 'unique',
+      }),
+    ])
   },
 
   down: async (queryInterface) => queryInterface.dropTable('khachhangs'),

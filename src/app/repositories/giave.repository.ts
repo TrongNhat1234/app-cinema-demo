@@ -1,20 +1,17 @@
-import DinhDangPhim from '@models/entities/dinhdangphim.entity'
+import GiaVe from '@models/entities/giave.entity'
 import { Service } from 'typedi'
 import { ModelCtor } from 'sequelize-typescript'
 import { BaseRepository } from './base.repository'
-import { DinhDangPhimRepositoryInterface } from './interfaces/dinhdangphim.repository.interface'
+import { GiaVeRepositoryInterface } from './interfaces/giave.repository.interface'
 import { ModelContainer } from '@decorators/model.decorator'
 const { QueryTypes } = require('sequelize')
 import DB from '@models/index'
 import { isEmpty } from 'class-validator'
 
 @Service({ global: true })
-class DinhDangPhimRepository
-  extends BaseRepository<DinhDangPhim>
-  implements DinhDangPhimRepositoryInterface<DinhDangPhim>
-{
-  constructor(@ModelContainer(DinhDangPhim.tableName) DinhDangPhim: ModelCtor<DinhDangPhim>) {
-    super(DinhDangPhim)
+class GiaVeRepository extends BaseRepository<GiaVe> implements GiaVeRepositoryInterface<GiaVe> {
+  constructor(@ModelContainer(GiaVe.tableName) GiaVe: ModelCtor<GiaVe>) {
+    super(GiaVe)
   }
 
   modelName = function () {
@@ -23,4 +20,4 @@ class DinhDangPhimRepository
   }
 }
 
-export default DinhDangPhimRepository
+export default GiaVeRepository

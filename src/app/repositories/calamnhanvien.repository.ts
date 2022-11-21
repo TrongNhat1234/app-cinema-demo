@@ -1,20 +1,20 @@
-import DinhDangPhim from '@models/entities/dinhdangphim.entity'
+import CaLamNhanVien from '@models/entities/calamnhanvien.entity'
 import { Service } from 'typedi'
 import { ModelCtor } from 'sequelize-typescript'
 import { BaseRepository } from './base.repository'
-import { DinhDangPhimRepositoryInterface } from './interfaces/dinhdangphim.repository.interface'
+import { CaLamNhanVienRepositoryInterface } from './interfaces/calamnhanvien.repository.interface'
 import { ModelContainer } from '@decorators/model.decorator'
 const { QueryTypes } = require('sequelize')
 import DB from '@models/index'
 import { isEmpty } from 'class-validator'
 
 @Service({ global: true })
-class DinhDangPhimRepository
-  extends BaseRepository<DinhDangPhim>
-  implements DinhDangPhimRepositoryInterface<DinhDangPhim>
+class CaLamNhanVienRepository
+  extends BaseRepository<CaLamNhanVien>
+  implements CaLamNhanVienRepositoryInterface<CaLamNhanVien>
 {
-  constructor(@ModelContainer(DinhDangPhim.tableName) DinhDangPhim: ModelCtor<DinhDangPhim>) {
-    super(DinhDangPhim)
+  constructor(@ModelContainer(CaLamNhanVien.tableName) CaLamNhanVien: ModelCtor<CaLamNhanVien>) {
+    super(CaLamNhanVien)
   }
 
   modelName = function () {
@@ -23,4 +23,4 @@ class DinhDangPhimRepository
   }
 }
 
-export default DinhDangPhimRepository
+export default CaLamNhanVienRepository

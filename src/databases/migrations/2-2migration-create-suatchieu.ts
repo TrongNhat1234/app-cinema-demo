@@ -18,7 +18,6 @@ module.exports = {
 
       id_phong_chieu: {
         allowNull: false,
-        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'phongchieus',
@@ -28,7 +27,6 @@ module.exports = {
 
       id_dinh_dang_phim: {
         allowNull: false,
-        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'dinhdangphims',
@@ -38,7 +36,6 @@ module.exports = {
 
       id_phim: {
         allowNull: false,
-        primaryKey: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'phims',

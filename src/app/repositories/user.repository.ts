@@ -7,7 +7,7 @@ import { ModelContainer } from '@decorators/model.decorator'
 import { env } from '@env'
 const { QueryTypes } = require('sequelize')
 import DB from '@models/index'
-import { isEmpty } from 'class-validator'
+import { isEmpty } from './../../common/utils/util'
 
 @Service({ global: true })
 class UserRepository extends BaseRepository<User> implements UserRepositoryInterface<User> {

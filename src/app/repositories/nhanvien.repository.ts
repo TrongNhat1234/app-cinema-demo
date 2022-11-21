@@ -18,15 +18,29 @@ class NhanVienRepository
     super(NhanVien)
   }
 
+  modelName = function () {
+    const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
+    return nameModel
+  }
+
   async findByEmail(email: string) {
-    return await DB.sequelize.query("SELECT * FROM `users` WHERE email = '" + email + "'", {
-      type: QueryTypes.SELECT,
-    })
+    return await DB.sequelize.query(
+      'SELECT * FROM ' + this.modelName() + " WHERE email = '" + email + "'",
+      {
+        type: QueryTypes.SELECT,
+      },
+    )
   }
 
   async findByEmailPassWord(email: string, password: string) {
     const nhanvien = await DB.sequelize.query(
-      "SELECT * FROM `nhanviens` WHERE email = '" + email + "' and mat_khau = '" + password + "'",
+      'SELECT * FROM ' +
+        this.modelName() +
+        " WHERE email = '" +
+        email +
+        "' and mat_khau = '" +
+        password +
+        "'",
       { type: QueryTypes.SELECT },
     )
     return nhanvien

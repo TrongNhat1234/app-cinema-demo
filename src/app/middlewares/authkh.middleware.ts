@@ -1,10 +1,10 @@
+import { KhachHang } from '@models/entities/khachhang.entity'
 import { AuthRequest } from '@interfaces/response.interface'
 import { ExpressMiddlewareInterface } from 'routing-controllers'
 import { Service } from 'typedi'
 import { HttpException } from '@exceptions/http.exception'
-import { IAccessToken } from '@interfaces/token.interface'
-import { verifyToken } from '@utils/token'
-import User from '@models/entities/user.entity'
+import { IAccessTokenKH } from '@interfaces/token.interface'
+import { verifyTokenKH } from '@utils/token'
 
 @Service()
 export class AuthMiddleware implements ExpressMiddlewareInterface {
@@ -17,19 +17,19 @@ export class AuthMiddleware implements ExpressMiddlewareInterface {
 
     const accessToken = bearer.split('Bearer ')[1].trim()
     try {
-      const payload = (await verifyToken(accessToken)) as IAccessToken
-      const user = await User.findOne({
+      const payload = (await verifyTokenKH(accessToken)) as IAccessTokenKH
+      const khachhang = await KhachHang.findOne({
         where: {
-          address: payload.address,
+          so_dien_thoai: payload.so_dien_thoai,
         },
         raw: true,
       })
 
-      if (!user) {
+      if (!khachhang) {
         return next(new HttpException(401, 'Unauthorised'))
       }
 
-      request.user = user
+      request.khachhang = khachhang
 
       return next()
     } catch (error) {

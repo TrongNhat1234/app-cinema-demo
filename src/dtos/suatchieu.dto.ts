@@ -26,4 +26,9 @@ export class CreateDto {
   @IsNotEmpty()
   @IsNumber()
   id_dinh_dang_phim: number
+
+  @Expose()
+  @IsNotEmpty()
+  @IsNumber()
+  ngay_chieu: Date
 }

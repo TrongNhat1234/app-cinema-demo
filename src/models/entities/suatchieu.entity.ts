@@ -57,6 +57,9 @@ export default class SuatChieu extends Model<SuatChieu> {
   @Column
   is_delete!: boolean
 
+  @Column
+  ngay_chieu!: Date
+
   @CreatedAt
   @Column
   createdAt!: Date

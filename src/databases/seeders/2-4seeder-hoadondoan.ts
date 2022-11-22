@@ -5,16 +5,19 @@ const hoadondoans = [
     id: 1,
     giam_gia: 0.5,
     tong_tien: 50000,
+    id_nhan_vien: 1,
   },
   {
     id: 2,
     giam_gia: 0.5,
     tong_tien: 40000,
+    id_nhan_vien: 1,
   },
   {
     id: 3,
     giam_gia: 0.1,
     tong_tien: 90000,
+    id_nhan_vien: 1,
   },
 ]
 

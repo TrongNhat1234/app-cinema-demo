@@ -3,12 +3,14 @@ import {
   CreatedAt,
   HasMany,
   BelongsToMany,
+  BelongsTo,
+  ForeignKey,
   Model,
   PrimaryKey,
   Table,
   UpdatedAt,
 } from 'sequelize-typescript'
-import HoaDonDoAn from './hoadondoan.entity'
+import NhanVien from './nhanvien.entity'
 import HoaDonChiTiet from './hoadonchitiet.entity'
 
 @Table({
@@ -30,6 +32,13 @@ export default class DoAn extends Model<DoAn> {
 
   @BelongsToMany(() => DoAn, () => HoaDonChiTiet)
   doans: DoAn[]
+
+  @ForeignKey(() => NhanVien)
+  @Column
+  id_nhan_vien!: number
+
+  @BelongsTo(() => NhanVien)
+  nhanvien!: NhanVien
 
   @Column
   is_delete!: boolean

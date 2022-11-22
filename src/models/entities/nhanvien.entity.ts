@@ -11,6 +11,7 @@ import {
 import CaLam from './calam.entity'
 import CaLamNhanVien from './calamnhanvien.entity'
 import VeBan from './veban.entity'
+import HoaDonDoAn from './hoadondoan.entity'
 
 @Table({
   tableName: 'nhanviens',
@@ -49,6 +50,9 @@ export default class NhanVien extends Model<NhanVien> {
 
   @HasMany(() => VeBan)
   vebans!: VeBan[]
+
+  @HasMany(() => HoaDonDoAn)
+  hoadondoans: HoaDonDoAn[]
 
   @Column
   is_delete!: boolean

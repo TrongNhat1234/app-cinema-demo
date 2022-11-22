@@ -13,11 +13,6 @@ module.exports = {
         defaultValue: new Date(),
       },
 
-      tong_tien: {
-        type: Sequelize.FLOAT,
-        allowNull: false,
-        defaultValue: 0,
-      },
       id_suat_chieu: {
         allowNull: false,
         foreignKey: true,
@@ -59,6 +54,12 @@ module.exports = {
           model: 'khachhangs',
           key: 'id',
         },
+      },
+
+      gia_ve: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+        defaultValue: 0,
       },
 
       is_delete: {

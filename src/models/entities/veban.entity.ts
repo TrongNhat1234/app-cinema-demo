@@ -28,9 +28,6 @@ export default class VeBan extends Model<VeBan> {
   @Column
   ngay_ban!: Date
 
-  @Column
-  tong_tien!: number
-
   @ForeignKey(() => SuatChieu)
   @Column
   id_suat_chieu!: number
@@ -65,6 +62,9 @@ export default class VeBan extends Model<VeBan> {
 
   @BelongsTo(() => KhachHang, 'id_khachhang')
   khach_hang: KhachHang
+
+  @Column
+  gia_ve!: number
 
   @Column
   is_delete!: boolean

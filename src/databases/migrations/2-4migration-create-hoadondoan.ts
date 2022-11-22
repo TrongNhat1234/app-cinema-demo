@@ -25,6 +25,15 @@ module.exports = {
         defaultValue: 0,
       },
 
+      id_nhan_vien: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'nhanviens',
+          key: 'id',
+        },
+      },
+
       is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,

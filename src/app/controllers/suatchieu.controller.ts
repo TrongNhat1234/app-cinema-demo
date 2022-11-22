@@ -48,16 +48,23 @@ export class SuatChieusController extends BaseController {
       return this.setMessage('Error').responseErrors(res)
     }
   }
-  @UseBefore(AdminMiddleware)
+  //@UseBefore(AdminMiddleware)
   @Post('/create')
   async createSuatChieu(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const data: CreateDto = req.body
-      console.log('data', data)
+      console.log(data)
       const suatchieu = await this.SuatChieuRepository.createSuatChieu(data)
-      return this.setData(data).setMessage('Create suatchieus successfully').responseSuccess(res)
+
+      return this.setCode(200)
+        .setData(data)
+        .setMessage('Create suatchieus successfully')
+        .responseSuccess(res)
     } catch (error) {
-      return this.setStack(error.stack).setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 }

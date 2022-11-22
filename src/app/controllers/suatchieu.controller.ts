@@ -48,7 +48,7 @@ export class SuatChieusController extends BaseController {
       return this.setMessage('Error').responseErrors(res)
     }
   }
-  //@UseBefore(AdminMiddleware)
+  @UseBefore(AdminMiddleware)
   @Post('/create')
   async createSuatChieu(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {

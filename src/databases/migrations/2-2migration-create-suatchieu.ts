@@ -69,6 +69,25 @@ module.exports = {
         defaultValue: new Date(),
       },
     })
+
+    await Promise.all([
+      QueryInterface.addIndex(
+        'suatchieus',
+        [
+          'gio_ket_thuc',
+          'gio_bat_dau',
+          'ngay_chieu',
+          'id_phim',
+          'id_dinh_dang_phim',
+          'id_phong_chieu',
+        ],
+        {
+          name: ['suatchieus', 'gio_bat_dau', 'ngay_chieu', 'id_phim', 'unique'].join('_'),
+          indicesType: 'unique',
+          type: 'unique',
+        },
+      ),
+    ])
   },
 
   down: async (queryInterface) => queryInterface.dropTable('suatchieus'),

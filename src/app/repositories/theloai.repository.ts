@@ -21,6 +21,20 @@ class TheLoaiRepository
     const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
     return nameModel
   }
+
+  async FindByListId(object: any) {
+    const list = []
+    for (let i = 0; i < object.length; i++) {
+      const a = await DB.sequelize.query(
+        'SELECT * FROM ' + this.modelName() + ' WHERE id = ' + object[i] + '',
+        {
+          type: QueryTypes.SELECT,
+        },
+      )
+      list.push(a)
+    }
+    return list
+  }
 }
 
 export default TheLoaiRepository

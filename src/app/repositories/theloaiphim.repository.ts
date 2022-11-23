@@ -21,6 +21,15 @@ class TheLoaiPhimRepository
     const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
     return nameModel
   }
+
+  async findByIdPhim(id_phim: number) {
+    return await DB.sequelize.query(
+      'SELECT * FROM ' + this.modelName() + ' WHERE id_phim = ' + id_phim + '',
+      {
+        type: QueryTypes.SELECT,
+      },
+    )
+  }
 }
 
 export default TheLoaiPhimRepository

@@ -1,4 +1,5 @@
 import { Model } from 'sequelize'
 import { BaseRepositoryInterface } from './base.repository.interface'
-
-export type TheLoaiRepositoryInterface<M extends Model> = BaseRepositoryInterface
+export interface TheLoaiRepositoryInterface<M extends Model> extends BaseRepositoryInterface {
+  FindByListId(object: any)
+}

@@ -5,22 +5,6 @@ const giaves = [
     id: 1,
     gia_ve: 23710,
   },
-  {
-    id: 2,
-    gia_ve: 543543,
-  },
-  {
-    id: 3,
-    gia_ve: 546,
-  },
-  {
-    id: 4,
-    gia_ve: 534534,
-  },
-  {
-    id: 5,
-    gia_ve: 40000,
-  },
 ]
 
 module.exports = {

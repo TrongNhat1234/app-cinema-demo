@@ -22,9 +22,6 @@ export default class GiaVe extends Model<GiaVe> {
   @Column
   gia_ve!: number
 
-  @HasMany(() => VeBan)
-  ves: VeBan[]
-
   @Column
   is_delete!: boolean
 

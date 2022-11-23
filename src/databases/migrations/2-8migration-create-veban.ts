@@ -22,15 +22,7 @@ module.exports = {
           key: 'id',
         },
       },
-      id_gia_ve: {
-        allowNull: false,
-        foreignKey: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'giaves',
-          key: 'id',
-        },
-      },
+
       id_ghe_ngoi: {
         allowNull: false,
         type: Sequelize.INTEGER,

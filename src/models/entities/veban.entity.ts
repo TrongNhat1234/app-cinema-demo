@@ -35,13 +35,6 @@ export default class VeBan extends Model<VeBan> {
   @BelongsTo(() => SuatChieu)
   suatchieu: SuatChieu
 
-  @ForeignKey(() => GiaVe)
-  @Column
-  id_gia_ve!: number
-
-  @BelongsTo(() => GiaVe)
-  giave: GiaVe
-
   @ForeignKey(() => NhanVien)
   @Column
   id_nhan_vien!: number

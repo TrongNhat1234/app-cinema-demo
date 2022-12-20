@@ -4,7 +4,16 @@ import { NextFunction, Response, Request } from 'express'
 import { LoginDto } from '../../dtos/khachhang.dto'
 import KhachHangRepository from '@repositories/khachhang.repository'
 import { BaseController } from './base.controller'
-import { BadRequestError, Body, Get, JsonController, Post, Req, Res } from 'routing-controllers'
+import {
+  BadRequestError,
+  Body,
+  Get,
+  Put,
+  JsonController,
+  Post,
+  Req,
+  Res,
+} from 'routing-controllers'
 import { Service } from 'typedi'
 import { setCacheExpire, getCacheExpire } from '@services/redis'
 import { createAccessTokenKH, createRefreshTokenKH, verifyTokenKH } from '@utils/token'
@@ -50,6 +59,35 @@ class KhachHangController extends BaseController {
       return this.setData({})
         .setCode(error?.status || 500)
         .setMessage(error?.message || 'Internal server error')
+        .responseErrors(res)
+    }
+  }
+
+  @Get('/list')
+  async getKhachHang(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const findAllKhachHangsData = await this.KhachHangRepository.getAll()
+      return this.setData(findAllKhachHangsData).setMessage('Success').responseSuccess(res)
+    } catch (error) {
+      return this.setMessage('Error').responseErrors(res)
+    }
+  }
+
+  @Put('/delete/:id')
+  async delete(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+    try {
+      const id = parseInt(req.params.id, 10)
+      const findKhachHangData = await this.KhachHangRepository.findById(id)
+      if (!isEmpty(findKhachHangData)) {
+        const KhachHang = await this.KhachHangRepository.deleteById(id)
+        return this.setData(KhachHang).setMessage('Delete khách hàng Success').responseSuccess(res)
+      } else {
+        return this.setMessage('id is null').responseSuccess(res)
+      }
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
         .responseErrors(res)
     }
   }

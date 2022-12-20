@@ -22,6 +22,17 @@ class SuatChieuRepository
     return nameModel
   }
 
+  async getAllNgay() {
+    return await DB.sequelize.query(
+      'SELECT * FROM ' +
+        this.modelName() +
+        ' where is_delete = 0 and (DATE(NOW()) - ngay_chieu) <=15 order by ngay_chieu desc ',
+      {
+        type: QueryTypes.SELECT,
+      },
+    )
+  }
+
   async createSuatChieu(object: any) {
     const a = await DB.sequelize.query(
       'INSERT INTO ' +
@@ -41,6 +52,27 @@ class SuatChieuRepository
         "')",
       {
         type: QueryTypes.INSERT,
+      },
+    )
+    return a
+  }
+
+  async updateSuatChieu(object: any) {
+    const a = await DB.sequelize.query(
+      'Update ' +
+        this.modelName() +
+        " set gio_bat_dau =  '" +
+        object.gio_bat_dau +
+        " ' , gio_ket_thuc = '" +
+        object.gio_ket_thuc +
+        " ', ngay_chieu = '" +
+        object.ngay_chieu +
+        " ' , id_phong_chieu = " +
+        object.id_phong_chieu +
+        ' where id = ' +
+        object.id,
+      {
+        type: QueryTypes.UPDATE,
       },
     )
     return a

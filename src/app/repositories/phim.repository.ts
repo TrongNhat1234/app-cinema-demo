@@ -18,6 +18,26 @@ class PhimRepository extends BaseRepository<Phim> implements PhimRepositoryInter
     const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
     return nameModel
   }
+
+  async createPhim(object: any) {
+    const a = await DB.sequelize.query(
+      'INSERT INTO ' +
+        this.modelName() +
+        " (ten_phim, thoi_luong_phim,gioi_han_tuoi,ngay_cong_chieu) VALUES ('" +
+        object.ten_phim +
+        "', '" +
+        object.thoi_luong_phim +
+        "', " +
+        object.gioi_han_tuoi +
+        ",'" +
+        object.ngay_cong_chieu +
+        "')",
+      {
+        type: QueryTypes.INSERT,
+      },
+    )
+    return a
+  }
 }
 
 export default PhimRepository

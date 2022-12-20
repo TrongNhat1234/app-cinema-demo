@@ -23,7 +23,7 @@ export abstract class BaseRepository<M extends Model> implements BaseRepositoryI
   }
 
   async getAll() {
-    return await DB.sequelize.query('SELECT * FROM ' + this.modelName(), {
+    return await DB.sequelize.query('SELECT * FROM ' + this.modelName() + ' where is_delete = 0', {
       type: QueryTypes.SELECT,
     })
   }
@@ -58,8 +58,13 @@ export abstract class BaseRepository<M extends Model> implements BaseRepositoryI
     return this.model.create(object, association)
   }
 
-  async deleteById(id: any): Promise<number> {
-    return this.model.destroy({ where: { id: id } })
+  async deleteById(id: any) {
+    return await DB.sequelize.query(
+      'update ' + this.modelName() + ' set is_delete = 1 where id = ' + id,
+      {
+        type: QueryTypes.UPDATE,
+      },
+    )
   }
 
   async update(object: Object, condition: any): Promise<any> {

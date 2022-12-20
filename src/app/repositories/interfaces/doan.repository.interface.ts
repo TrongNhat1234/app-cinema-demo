@@ -1,4 +1,6 @@
 import { Model } from 'sequelize'
 import { BaseRepositoryInterface } from './base.repository.interface'
 
-export type DoAnRepositoryInterface<M extends Model> = BaseRepositoryInterface
+export interface DoAnRepositoryInterface<M extends Model> extends BaseRepositoryInterface {
+  createDoAn(object: any)
+}

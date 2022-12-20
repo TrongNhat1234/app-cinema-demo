@@ -18,6 +18,24 @@ class DoAnRepository extends BaseRepository<DoAn> implements DoAnRepositoryInter
     const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
     return nameModel
   }
+
+  async createDoAn(object: any) {
+    const a = await DB.sequelize.query(
+      'INSERT INTO ' +
+        this.modelName() +
+        " (ten_do_an, gia,size) VALUES ('" +
+        object.ten_do_an +
+        "', '" +
+        object.size +
+        "', " +
+        object.gia +
+        ')',
+      {
+        type: QueryTypes.INSERT,
+      },
+    )
+    return a
+  }
 }
 
 export default DoAnRepository

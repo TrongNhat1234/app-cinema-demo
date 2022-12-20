@@ -3,17 +3,17 @@ const wrapValuesWithDateTime10 = require('../utils/wrapValuesWithDateTime.ts')
 const dinhdangphims = [
   {
     id: 1,
-    ten_dinh_dang: 'Định Dạng A',
+    ten_dinh_dang: '2D',
   },
 
   {
     id: 2,
-    ten_dinh_dang: 'Định Dạng B',
+    ten_dinh_dang: '3D',
   },
 
   {
     id: 3,
-    ten_dinh_dang: 'Định Dạng C',
+    ten_dinh_dang: 'IMAX',
   },
 ]
 

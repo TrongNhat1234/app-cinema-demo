@@ -19,6 +19,7 @@ import { Service } from 'typedi'
 import SuatChieuRepository from '@repositories/suatchieu.repository'
 const jwt = require('jsonwebtoken')
 import { CreateDto } from '../../dtos/suatchieu.dto'
+
 import { isEmpty } from './../../common/utils/util'
 
 import { AdminMiddleware } from '@middlewares/admin.middleware'
@@ -48,6 +49,17 @@ export class SuatChieusController extends BaseController {
       return this.setMessage('Error').responseErrors(res)
     }
   }
+
+  @Get('/listngay')
+  async getSuatChieuTheoNgay(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const findAllSuatChieusData = await this.SuatChieuRepository.getAllNgay()
+      return this.setData(findAllSuatChieusData).setMessage('Success').responseSuccess(res)
+    } catch (error) {
+      return this.setMessage('Error').responseErrors(res)
+    }
+  }
+
   @UseBefore(AdminMiddleware)
   @Post('/create')
   async createSuatChieu(@Req() req: Request, @Res() res: Response, next: NextFunction) {
@@ -60,6 +72,26 @@ export class SuatChieusController extends BaseController {
         .setData(data)
         .setMessage('Create suatchieus successfully')
         .responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
+  @Put('/update')
+  async delete(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+    try {
+      const data = req.body
+      const id = parseInt(req.body.id, 10)
+      const findSuatChieuData = await this.SuatChieuRepository.findById(id)
+      if (!isEmpty(findSuatChieuData)) {
+        const SuatChieu = await this.SuatChieuRepository.updateSuatChieu(data)
+        return this.setData(data).setMessage('update SuatChieu Success').responseSuccess(res)
+      } else {
+        return this.setMessage('id is null').responseSuccess(res)
+      }
     } catch (error) {
       return this.setData({})
         .setCode(error?.status || 500)

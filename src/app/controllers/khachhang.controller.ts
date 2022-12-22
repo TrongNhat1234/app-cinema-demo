@@ -67,9 +67,15 @@ class KhachHangController extends BaseController {
   async getKhachHang(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
       const findAllKhachHangsData = await this.KhachHangRepository.getAll()
-      return this.setData(findAllKhachHangsData).setMessage('Success').responseSuccess(res)
+      return this.setCode(200)
+        .setData(findAllKhachHangsData)
+        .setMessage('Success')
+        .responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 
@@ -80,9 +86,12 @@ class KhachHangController extends BaseController {
       const findKhachHangData = await this.KhachHangRepository.findById(id)
       if (!isEmpty(findKhachHangData)) {
         const KhachHang = await this.KhachHangRepository.deleteById(id)
-        return this.setData(KhachHang).setMessage('Delete khách hàng Success').responseSuccess(res)
+        return this.setCode(200)
+          .setData(KhachHang)
+          .setMessage('Delete khách hàng Success')
+          .responseSuccess(res)
       } else {
-        return this.setMessage('id is null').responseSuccess(res)
+        return this.setCode(500).setMessage('id is null').responseSuccess(res)
       }
     } catch (error) {
       return this.setData({})

@@ -36,9 +36,15 @@ export class TheLoaiPhimsController extends BaseController {
   async getTheLoaiPhim(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
       const findAllTheLoaiPhimsData = await this.TheLoaiPhimRepository.getAll()
-      return this.setData(findAllTheLoaiPhimsData).setMessage('Success').responseSuccess(res)
+      return this.setCode(200)
+        .setData(findAllTheLoaiPhimsData)
+        .setMessage('Success')
+        .responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 
@@ -47,9 +53,15 @@ export class TheLoaiPhimsController extends BaseController {
     try {
       const id_phim = req.params.id_phim
       const findAllTheLoaiPhimsData = await this.TheLoaiPhimRepository.findByIdPhim(id_phim)
-      return this.setData(findAllTheLoaiPhimsData).setMessage('Success').responseSuccess(res)
+      return this.setCode(200)
+        .setData(findAllTheLoaiPhimsData)
+        .setMessage('Success')
+        .responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 }

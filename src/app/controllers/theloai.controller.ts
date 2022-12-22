@@ -40,9 +40,15 @@ export class TheLoaisController extends BaseController {
   async getTheLoai(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
       const findAllTheLoaisData = await this.TheLoaiRepository.getAll()
-      return this.setData(findAllTheLoaisData).setMessage('Success').responseSuccess(res)
+      return this.setCode(200)
+        .setData(findAllTheLoaisData)
+        .setMessage('Success')
+        .responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 
@@ -58,9 +64,15 @@ export class TheLoaisController extends BaseController {
         list.push(theLoaiPhim?.id_the_loai)
       })
       const findAllTheLoaisData = await this.TheLoaiRepository.FindByListId(list)
-      return this.setData(findAllTheLoaisData).setMessage('Success').responseSuccess(res)
+      return this.setCode(200)
+        .setData(findAllTheLoaisData)
+        .setMessage('Success')
+        .responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 }

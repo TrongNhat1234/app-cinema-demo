@@ -44,7 +44,10 @@ export class SuatChieusController extends BaseController {
   async getSuatChieu(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
       const findAllSuatChieusData = await this.SuatChieuRepository.getAll()
-      return this.setData(findAllSuatChieusData).setMessage('Success').responseSuccess(res)
+      return this.setCode(200)
+        .setData(findAllSuatChieusData)
+        .setMessage('Success')
+        .responseSuccess(res)
     } catch (error) {
       return this.setMessage('Error').responseErrors(res)
     }
@@ -54,9 +57,15 @@ export class SuatChieusController extends BaseController {
   async getSuatChieuTheoNgay(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
       const findAllSuatChieusData = await this.SuatChieuRepository.getAllNgay()
-      return this.setData(findAllSuatChieusData).setMessage('Success').responseSuccess(res)
+      return this.setCode(200)
+        .setData(findAllSuatChieusData)
+        .setMessage('Success')
+        .responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 
@@ -88,9 +97,12 @@ export class SuatChieusController extends BaseController {
       const findSuatChieuData = await this.SuatChieuRepository.findById(id)
       if (!isEmpty(findSuatChieuData)) {
         const SuatChieu = await this.SuatChieuRepository.updateSuatChieu(data)
-        return this.setData(data).setMessage('update SuatChieu Success').responseSuccess(res)
+        return this.setCode(200)
+          .setData(data)
+          .setMessage('update SuatChieu Success')
+          .responseSuccess(res)
       } else {
-        return this.setMessage('id is null').responseSuccess(res)
+        return this.setCode(500).setMessage('id is null').responseSuccess(res)
       }
     } catch (error) {
       return this.setData({})

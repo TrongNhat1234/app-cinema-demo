@@ -36,9 +36,12 @@ export class UsersController extends BaseController {
   async getUser(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
       const findAllUsersData = await User.findAll()
-      return this.setData(findAllUsersData).setMessage('Success').responseSuccess(res)
+      return this.setCode(200).setData(findAllUsersData).setMessage('Success').responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 
@@ -49,9 +52,12 @@ export class UsersController extends BaseController {
       const user = req.user
       const { id } = user
       const findUserById = await this.userRepository.findById(id)
-      return this.setData(findUserById).setMessage('Success').responseSuccess(res)
+      return this.setCode(200).setData(findUserById).setMessage('Success').responseSuccess(res)
     } catch (error: any) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 }

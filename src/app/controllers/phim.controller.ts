@@ -40,9 +40,56 @@ export class PhimsController extends BaseController {
   async getTheLoai(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
       const findAllTheLoaisData = await this.PhimRepository.getAll()
-      return this.setData(findAllTheLoaisData).setMessage('Success').responseSuccess(res)
+      return this.setCode(200)
+        .setData(findAllTheLoaisData)
+        .setMessage('Success')
+        .responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
+  @Get('/listphimdangchieus')
+  async getDangChieu(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const findAllPhimData = await this.PhimRepository.getPhimDangChieu()
+      return this.setCode(200).setData(findAllPhimData).setMessage('Success').responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
+  @Get('/listphimsapchieus')
+  async getListSapChieus(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const findAllPhimData = await this.PhimRepository.getPhimSapChieu()
+      return this.setCode(200).setData(findAllPhimData).setMessage('Success').responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
+  @Get('/listphimsuatchieungays')
+  async getPhimSuatChieuNgay(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const id = req.body.id
+      const ngayChieu = req.body.ngay_chieu
+      const findAllPhimData = await this.PhimRepository.getPhimSuatChieuNgay(id, ngayChieu)
+      return this.setCode(200).setData(findAllPhimData).setMessage('Success').responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 
@@ -71,9 +118,9 @@ export class PhimsController extends BaseController {
       const findPhimData = await this.PhimRepository.findById(id)
       if (!isEmpty(findPhimData)) {
         const ass = await this.PhimRepository.deleteById(id)
-        return this.setData(ass).setMessage('Success').responseSuccess(res)
+        return this.setCode(200).setData(ass).setMessage('Success').responseSuccess(res)
       } else {
-        return this.setMessage('id is null').responseSuccess(res)
+        return this.setCode(500).setMessage('id is null').responseSuccess(res)
       }
     } catch (error) {
       return this.setData({})

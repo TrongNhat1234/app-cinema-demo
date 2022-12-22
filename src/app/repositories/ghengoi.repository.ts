@@ -21,6 +21,21 @@ class GheNgoiRepository
     const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
     return nameModel
   }
+  async getGheDaMua(idPhim: number, idSuatChieu: number) {
+    const ghes = await DB.sequelize.query(
+      'call ds_ghe_damua_phim_suatchieu(' + idPhim + ', ' + idSuatChieu + '  )',
+      { type: QueryTypes.CALL },
+    )
+    return ghes
+  }
+
+  async getGheChuaMua(idPhim: number, idSuatChieu: number) {
+    const ghes = await DB.sequelize.query(
+      'call ds_ghe_chuamua_phim_suatchieu(' + idPhim + ', ' + idSuatChieu + '  )',
+      { type: QueryTypes.CALL },
+    )
+    return ghes
+  }
 }
 
 export default GheNgoiRepository

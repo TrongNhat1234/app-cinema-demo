@@ -39,9 +39,12 @@ export class DoAnsController extends BaseController {
   async getDoAn(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
       const findAllDoAnsData = await this.DoAnRepository.getAll()
-      return this.setData(findAllDoAnsData).setMessage('Success').responseSuccess(res)
+      return this.setCode(200).setData(findAllDoAnsData).setMessage('Success').responseSuccess(res)
     } catch (error) {
-      return this.setMessage('Error').responseErrors(res)
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
     }
   }
 

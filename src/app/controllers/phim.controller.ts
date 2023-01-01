@@ -78,11 +78,11 @@ export class PhimsController extends BaseController {
     }
   }
 
-  @Get('/listphimsuatchieungays')
+  @Get('/listphimsuatchieungays/id=:id/ngay_chieu=:ngay_chieu')
   async getPhimSuatChieuNgay(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const id = req.body.id
-      const ngayChieu = req.body.ngay_chieu
+      const id = req.params.id
+      const ngayChieu = req.params.ngay_chieu
       const findAllPhimData = await this.PhimRepository.getPhimSuatChieuNgay(id, ngayChieu)
       return this.setCode(200).setData(findAllPhimData).setMessage('Success').responseSuccess(res)
     } catch (error) {

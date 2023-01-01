@@ -9,8 +9,7 @@ module.exports = {
       },
       ngay_ban: {
         type: Sequelize.DATE,
-        allowNull: false,
-        defaultValue: new Date(),
+        allowNull: true,
       },
 
       id_suat_chieu: {

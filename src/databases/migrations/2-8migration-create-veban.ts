@@ -54,6 +54,12 @@ module.exports = {
         defaultValue: 0,
       },
 
+      trang_thai: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0, //0 là chưa mua, 1 là đã mua, 2 là đang chọn
+      },
+
       is_delete: {
         type: Sequelize.BOOLEAN,
         allowNull: false,

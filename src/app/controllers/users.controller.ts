@@ -49,7 +49,7 @@ export class UsersController extends BaseController {
   @Get('/detail')
   async getUserDetail(@Req() req: AuthRequest, @Res() res: Response, next: NextFunction) {
     try {
-      const user = req.user
+      const user = req.body.user
       const { id } = user
       const findUserById = await this.userRepository.findById(id)
       return this.setCode(200).setData(findUserById).setMessage('Success').responseSuccess(res)

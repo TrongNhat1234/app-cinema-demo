@@ -34,7 +34,7 @@ const ghengois = [
     day_so: 4,
     da_chon: false,
     id_phong_chieu: 2,
-    id_ghe: 4,
+    id_ghe: 1,
   },
 ]
 

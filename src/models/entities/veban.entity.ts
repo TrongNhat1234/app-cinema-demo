@@ -60,6 +60,9 @@ export default class VeBan extends Model<VeBan> {
   gia_ve!: number
 
   @Column
+  trang_thai!: number
+
+  @Column
   is_delete!: boolean
 
   @CreatedAt

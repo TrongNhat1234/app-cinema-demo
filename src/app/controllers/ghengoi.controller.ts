@@ -48,9 +48,8 @@ export class GheNgoisController extends BaseController {
   @Get('/damuas')
   async getGheDaMua(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const idPhim = req.body.id_phim
       const idSuatChieu = req.body.id_suat_chieu
-      const findAllGheNgoisData = await this.GheNgoiRepository.getGheDaMua(idPhim, idSuatChieu)
+      const findAllGheNgoisData = await this.GheNgoiRepository.getGheDaMua(idSuatChieu)
       return this.setCode(200)
         .setData(findAllGheNgoisData)
         .setMessage('Success')
@@ -66,9 +65,25 @@ export class GheNgoisController extends BaseController {
   @Get('/chuamuas')
   async getGheChuaMua(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const idPhim = req.body.id_phim
       const idSuatChieu = req.body.id_suat_chieu
-      const findAllGheNgoisData = await this.GheNgoiRepository.getGheChuaMua(idPhim, idSuatChieu)
+      const findAllGheNgoisData = await this.GheNgoiRepository.getGheChuaMua(idSuatChieu)
+      return this.setCode(200)
+        .setData(findAllGheNgoisData)
+        .setMessage('Success')
+        .responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
+  @Get('/dangchons')
+  async getGheDangChon(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const idSuatChieu = req.body.id_suat_chieu
+      const findAllGheNgoisData = await this.GheNgoiRepository.getGheDangChon(idSuatChieu)
       return this.setCode(200)
         .setData(findAllGheNgoisData)
         .setMessage('Success')

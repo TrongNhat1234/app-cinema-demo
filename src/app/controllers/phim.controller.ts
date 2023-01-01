@@ -93,6 +93,7 @@ export class PhimsController extends BaseController {
     }
   }
 
+  @UseBefore(AdminMiddleware)
   @Post('/create')
   async createPhim(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
@@ -111,6 +112,8 @@ export class PhimsController extends BaseController {
         .responseErrors(res)
     }
   }
+
+  @UseBefore(AdminMiddleware)
   @Put('/delete/:id')
   async delete(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {

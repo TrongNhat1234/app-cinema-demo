@@ -13,6 +13,7 @@ import {
   Post,
   Req,
   Res,
+  UseBefore,
 } from 'routing-controllers'
 import { Service } from 'typedi'
 import { setCacheExpire, getCacheExpire } from '@services/redis'
@@ -20,6 +21,8 @@ import { createAccessTokenKH, createRefreshTokenKH, verifyTokenKH } from '@utils
 import { loginMessage } from '@utils/message'
 import { ethers } from 'ethers'
 import { REFRESH_TTL } from '@utils/constants'
+import { AdminMiddleware } from '@middlewares/admin.middleware'
+import { AuthRequest } from '@interfaces/response.interface'
 
 @JsonController('/khachhangs')
 @Service()
@@ -79,6 +82,7 @@ class KhachHangController extends BaseController {
     }
   }
 
+  @UseBefore(AdminMiddleware)
   @Put('/delete/:id')
   async delete(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {

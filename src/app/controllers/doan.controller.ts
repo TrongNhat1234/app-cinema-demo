@@ -48,6 +48,7 @@ export class DoAnsController extends BaseController {
     }
   }
 
+  @UseBefore(AdminMiddleware)
   @Post('/create')
   async createPhim(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {

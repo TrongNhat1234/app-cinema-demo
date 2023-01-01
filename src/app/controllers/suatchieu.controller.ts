@@ -89,6 +89,7 @@ export class SuatChieusController extends BaseController {
     }
   }
 
+  @UseBefore(AdminMiddleware)
   @Put('/update')
   async delete(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {

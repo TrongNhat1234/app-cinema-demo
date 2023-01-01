@@ -45,10 +45,10 @@ export class GheNgoisController extends BaseController {
     }
   }
 
-  @Get('/damuas')
+  @Get('/damuas/id_suat_chieu=:id_suat_chieu')
   async getGheDaMua(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const idSuatChieu = req.body.id_suat_chieu
+      const idSuatChieu = req.params.id_suat_chieu
       const findAllGheNgoisData = await this.GheNgoiRepository.getGheDaMua(idSuatChieu)
       return this.setCode(200)
         .setData(findAllGheNgoisData)
@@ -62,10 +62,10 @@ export class GheNgoisController extends BaseController {
     }
   }
 
-  @Get('/chuamuas')
+  @Get('/chuamuas/id_suat_chieu=:id_suat_chieu')
   async getGheChuaMua(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const idSuatChieu = req.body.id_suat_chieu
+      const idSuatChieu = req.params.id_suat_chieu
       const findAllGheNgoisData = await this.GheNgoiRepository.getGheChuaMua(idSuatChieu)
       return this.setCode(200)
         .setData(findAllGheNgoisData)
@@ -79,10 +79,10 @@ export class GheNgoisController extends BaseController {
     }
   }
 
-  @Get('/dangchons')
+  @Get('/dangchons/id_suat_chieu=:id_suat_chieu')
   async getGheDangChon(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const idSuatChieu = req.body.id_suat_chieu
+      const idSuatChieu = req.params.id_suat_chieu
       const findAllGheNgoisData = await this.GheNgoiRepository.getGheDangChon(idSuatChieu)
       return this.setCode(200)
         .setData(findAllGheNgoisData)

@@ -18,7 +18,7 @@ import GheNgoi from './ghengoi.entity'
 import KhachHang from './khachhang.entity'
 
 @Table({
-  tableName: 'ves',
+  tableName: 'vebans',
 })
 export default class VeBan extends Model<VeBan> {
   @PrimaryKey
@@ -53,7 +53,7 @@ export default class VeBan extends Model<VeBan> {
   @Column
   id_khach_hang!: number
 
-  @BelongsTo(() => KhachHang, 'id_khachhang')
+  @BelongsTo(() => KhachHang, 'id_khach_hang')
   khach_hang: KhachHang
 
   @Column

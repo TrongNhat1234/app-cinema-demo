@@ -22,6 +22,19 @@ class KhachHangRepository
     return nameModel
   }
 
+  async findBySoDienThoai(so_dien_thoai: string) {
+    return await DB.sequelize.query(
+      'SELECT * FROM ' +
+        this.modelName() +
+        " where is_delete = 0 and so_dien_thoai = '" +
+        so_dien_thoai +
+        "'",
+      {
+        type: QueryTypes.SELECT,
+      },
+    )
+  }
+
   async findOrCreateByEmail(so_dien_thoai: string, password: string) {
     console.log(this.modelName())
     const customer = await DB.sequelize.query(

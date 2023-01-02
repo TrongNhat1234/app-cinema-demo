@@ -37,7 +37,7 @@ export default class KhachHang extends Model<KhachHang> {
   @Column
   ngay_sinh: Date
 
-  @HasMany(() => VeBan, 'id_khachhang')
+  @HasMany(() => VeBan, 'id_khach_hang')
   ves: VeBan[]
 
   @Column

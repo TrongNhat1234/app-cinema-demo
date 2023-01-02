@@ -18,6 +18,21 @@ class VeBanRepository extends BaseRepository<VeBan> implements VeBanRepositoryIn
     const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
     return nameModel
   }
+
+  async DatVeVeBanNV(object: any) {
+    const a = await DB.sequelize.query(
+      'UPDATE ' +
+        this.modelName() +
+        ' set trang_thai = 1, id_khach_hang = ' +
+        object.id_khach_hang +
+        ' where id = ' +
+        object.id,
+      {
+        type: QueryTypes.UPDATE,
+      },
+    )
+    return a
+  }
 }
 
 export default VeBanRepository

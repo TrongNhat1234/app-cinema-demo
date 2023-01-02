@@ -21,6 +21,22 @@ class HoaDonDoAnRepository
     const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
     return nameModel
   }
+
+  async createHoaDonDoAn(id_nhan_vien: number, giam_gia: number) {
+    const a = await DB.sequelize.query(
+      'INSERT INTO ' +
+        this.modelName() +
+        ' ( id_nhan_vien,giam_gia) VALUES (' +
+        id_nhan_vien +
+        ',' +
+        giam_gia +
+        ')',
+      {
+        type: QueryTypes.INSERT,
+      },
+    )
+    return a
+  }
 }
 
 export default HoaDonDoAnRepository

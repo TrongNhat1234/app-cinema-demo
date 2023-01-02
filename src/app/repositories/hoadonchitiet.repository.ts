@@ -21,6 +21,98 @@ class HoaDonChiTietRepository
     const nameModel: string = this.model.toString().split(' ')[1].toLowerCase() + 's'
     return nameModel
   }
+  async findbyidhoadon(id_hoa_don_do_an: number) {
+    return await DB.sequelize.query(
+      'SELECT * FROM ' +
+        this.modelName() +
+        ' where is_delete = 0 and id_hoa_don_do_an = ' +
+        id_hoa_don_do_an,
+      {
+        type: QueryTypes.SELECT,
+      },
+    )
+  }
+
+  async findbyidhoadondoan(id_hoa_don_do_an: number, id_do_an: number) {
+    return await DB.sequelize.query(
+      'SELECT * FROM ' +
+        this.modelName() +
+        ' where is_delete = 1 and id_hoa_don_do_an = ' +
+        id_hoa_don_do_an +
+        ' and id_do_an = ' +
+        id_do_an,
+      {
+        type: QueryTypes.SELECT,
+      },
+    )
+  }
+
+  async createHoaDonChiTiet(object: any) {
+    const a = await DB.sequelize.query(
+      'INSERT INTO ' +
+        this.modelName() +
+        ' ( id_hoa_don_do_an,id_do_an,so_luong) VALUES (' +
+        object.id_hoa_don_do_an +
+        ',' +
+        object.id_do_an +
+        ',' +
+        object.so_luong +
+        ')',
+      {
+        type: QueryTypes.INSERT,
+      },
+    )
+    return a
+  }
+
+  async updateHoaDonChiTiet(object: any) {
+    const a = await DB.sequelize.query(
+      'UPDATE ' +
+        this.modelName() +
+        ' set so_luong = ' +
+        object.so_luong +
+        ' where id_hoa_don_do_an = ' +
+        object.id_hoa_don_do_an +
+        ' and id_do_an = ' +
+        object.id_do_an,
+      {
+        type: QueryTypes.UPDATE,
+      },
+    )
+    return a
+  }
+
+  async updateHoaDonChiTietCreate(object: any) {
+    const a = await DB.sequelize.query(
+      'UPDATE ' +
+        this.modelName() +
+        ' set is_delete = 0 ,so_luong = ' +
+        object.so_luong +
+        ' where id_hoa_don_do_an = ' +
+        object.id_hoa_don_do_an +
+        ' and id_do_an = ' +
+        object.id_do_an,
+      {
+        type: QueryTypes.UPDATE,
+      },
+    )
+    return a
+  }
+
+  async deleteHoaDonChiTiet(object: any) {
+    const a = await DB.sequelize.query(
+      'UPDATE ' +
+        this.modelName() +
+        ' set is_delete = 1 where id_hoa_don_do_an = ' +
+        object.id_hoa_don_do_an +
+        ' and id_do_an = ' +
+        object.id_do_an,
+      {
+        type: QueryTypes.UPDATE,
+      },
+    )
+    return a
+  }
 }
 
 export default HoaDonChiTietRepository

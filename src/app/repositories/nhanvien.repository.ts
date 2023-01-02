@@ -32,6 +32,15 @@ class NhanVienRepository
     )
   }
 
+  async findByEmailRole(email: string) {
+    return await DB.sequelize.query(
+      'SELECT id FROM ' + this.modelName() + " WHERE email = '" + email + "' and vai_tro='nv'",
+      {
+        type: QueryTypes.SELECT,
+      },
+    )
+  }
+
   async findByEmailPassWord(email: string, password: string) {
     const nhanvien = await DB.sequelize.query(
       'SELECT * FROM ' +

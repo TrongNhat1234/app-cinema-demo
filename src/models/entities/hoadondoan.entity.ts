@@ -14,9 +14,9 @@ import NhanVien from './nhanvien.entity'
 import HoaDonChiTiet from './hoadonchitiet.entity'
 
 @Table({
-  tableName: 'doans',
+  tableName: 'hoadondoans',
 })
-export default class DoAn extends Model<DoAn> {
+export default class HoaDonDoAn extends Model<HoaDonDoAn> {
   @PrimaryKey
   @Column
   id!: number
@@ -30,8 +30,8 @@ export default class DoAn extends Model<DoAn> {
   @Column
   tong_tien!: number
 
-  @BelongsToMany(() => DoAn, () => HoaDonChiTiet)
-  doans: DoAn[]
+  @BelongsToMany(() => HoaDonDoAn, () => HoaDonChiTiet)
+  hoadondoans: HoaDonDoAn[]
 
   @ForeignKey(() => NhanVien)
   @Column
@@ -52,4 +52,4 @@ export default class DoAn extends Model<DoAn> {
   updatedAt!: Date
 }
 
-export { DoAn }
+export { HoaDonDoAn }

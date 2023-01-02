@@ -61,10 +61,10 @@ export class HoaDonDoAnsController extends BaseController {
   }
 
   @UseBefore(NVMiddleware)
-  @Get('/list/:id')
+  @Get('/list/id')
   async getHoaDonDoAnId(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const id = req.params.id
+      const id = req.query.id
       const findAllHoaDonDoAnsData = await this.HoaDonDoAnRepository.findById(id)
       return this.setCode(200)
         .setData(findAllHoaDonDoAnsData)
@@ -111,10 +111,10 @@ export class HoaDonDoAnsController extends BaseController {
     }
   }
   @UseBefore(NVMiddleware)
-  @Put('/delete/:id')
+  @Put('/delete/id')
   async deleteHoaDonDoAn(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const id = req.params.id
+      const id = req.query.id
       const HoaDonDoAn = await this.HoaDonDoAnRepository.deleteById(id)
 
       return this.setCode(200)

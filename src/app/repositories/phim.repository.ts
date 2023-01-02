@@ -43,7 +43,7 @@ class PhimRepository extends BaseRepository<Phim> implements PhimRepositoryInter
     const phims = await DB.sequelize.query(
       'SELECT * FROM ' +
         this.modelName() +
-        ' where id in (select distinct id_phim FROM cinema.suatchieus where (DATE(NOW()) - ngay_chieu) <=15)',
+        ' where id in (select distinct id_phim FROM cinema.suatchieus where  ngay_chieu >=  DATE(NOW()))',
       { type: QueryTypes.SELECT },
     )
     return phims
@@ -57,12 +57,12 @@ class PhimRepository extends BaseRepository<Phim> implements PhimRepositoryInter
     return phims
   }
 
-  async getPhimSuatChieuNgay(id: number, ngay_chieu: Date) {
-    const phims = await DB.sequelize.query(
-      'call phim_suatchieu_ngay(' + id + ', ' + ngay_chieu + '  )',
+  async getPhimSuatChieuNgay(id_phim: number, ngay_chieu: Date) {
+    const suatchieus = await DB.sequelize.query(
+      'call phim_suatchieu_ngay(' + id_phim + ",' " + ngay_chieu + "'  )",
       { type: QueryTypes.CALL },
     )
-    return phims
+    return suatchieus
   }
 }
 

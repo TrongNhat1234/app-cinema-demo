@@ -78,12 +78,13 @@ export class PhimsController extends BaseController {
     }
   }
 
-  @Get('/listphimsuatchieungays/id=:id/ngay_chieu=:ngay_chieu')
+  @Get('/listphimsuatchieungays')
   async getPhimSuatChieuNgay(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const id = req.params.id
-      const ngayChieu = req.params.ngay_chieu
-      const findAllPhimData = await this.PhimRepository.getPhimSuatChieuNgay(id, ngayChieu)
+      const id_phim = req.query.id_phim
+      const ngayChieu = req.query.ngay_chieu
+      const findAllPhimData = await this.PhimRepository.getPhimSuatChieuNgay(id_phim, ngayChieu)
+      console.log(findAllPhimData)
       return this.setCode(200).setData(findAllPhimData).setMessage('Success').responseSuccess(res)
     } catch (error) {
       return this.setData({})
@@ -114,10 +115,10 @@ export class PhimsController extends BaseController {
   }
 
   @UseBefore(AdminMiddleware)
-  @Put('/delete/:id')
+  @Put('/delete/id')
   async delete(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const id = parseInt(req.params.id, 10)
+      const id = parseInt(req.query.id, 10)
       const findPhimData = await this.PhimRepository.findById(id)
       if (!isEmpty(findPhimData)) {
         const ass = await this.PhimRepository.deleteById(id)

@@ -83,10 +83,10 @@ class KhachHangController extends BaseController {
   }
 
   @UseBefore(AdminMiddleware)
-  @Put('/delete/:id')
+  @Put('/delete/id')
   async delete(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const id = parseInt(req.params.id, 10)
+      const id = parseInt(req.query.id, 10)
       const findKhachHangData = await this.KhachHangRepository.findById(id)
       if (!isEmpty(findKhachHangData)) {
         const KhachHang = await this.KhachHangRepository.deleteById(id)

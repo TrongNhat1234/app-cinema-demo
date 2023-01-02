@@ -52,10 +52,10 @@ export class TheLoaisController extends BaseController {
     }
   }
 
-  @Get('/id_phim=:idphim')
+  @Get('/list')
   async getTheLoaiListId(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const idphim = req.params.idphim
+      const idphim = req.query.idphim
       const findAllIDTheLoaiPhimsData = await new TheLoaiPhimRepository(TheLoaiPhim).findByIdPhim(
         idphim,
       )

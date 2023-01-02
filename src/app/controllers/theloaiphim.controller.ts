@@ -48,10 +48,10 @@ export class TheLoaiPhimsController extends BaseController {
     }
   }
 
-  @Get('/id_phim=:id_phim')
+  @Get('/list')
   async getTheLoaiPhimIdPhim(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const id_phim = req.params.id_phim
+      const id_phim = req.query.id_phim
       const findAllTheLoaiPhimsData = await this.TheLoaiPhimRepository.findByIdPhim(id_phim)
       return this.setCode(200)
         .setData(findAllTheLoaiPhimsData)

@@ -44,10 +44,10 @@ export class HoaDonChiTietsController extends BaseController {
   }
 
   @UseBefore(NVMiddleware)
-  @Get('/list/id_hoa_don_do_an=:id')
+  @Get('/list/id')
   async getHoaDonChiTiet(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const id = req.params.id
+      const id = req.query.id_hoa_don_do_an
       const findAllHoaDonChiTietsData = await this.HoaDonChiTietRepository.findbyidhoadon(id)
       return this.setCode(200)
         .setData(findAllHoaDonChiTietsData)
@@ -110,12 +110,12 @@ export class HoaDonChiTietsController extends BaseController {
   }
 
   @UseBefore(NVMiddleware)
-  @Put('/delete/id_hoa_don_do_an=:id_hoa_don_do_an/id_do_an=:id_do_an')
+  @Put('/delete')
   async deleteHoaDonChiTiet(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const data = {
-        id_hoa_don_do_an: parseInt(req.params.id_hoa_don_do_an, 10),
-        id_do_an: parseInt(req.params.id_do_an, 10),
+        id_hoa_don_do_an: parseInt(req.query.id_hoa_don_do_an, 10),
+        id_do_an: parseInt(req.query.id_do_an, 10),
       }
       const HoaDonChiTiet = await this.HoaDonChiTietRepository.deleteHoaDonChiTiet(data)
 

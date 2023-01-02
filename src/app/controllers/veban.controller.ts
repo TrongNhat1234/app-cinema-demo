@@ -57,10 +57,10 @@ export class VeBansController extends BaseController {
     }
   }
 
-  @Get('/id_ve_ban=:id_ve_ban')
+  @Get('/')
   async getVeBanIdPhim(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const id_ve_ban = req.params.id_ve_ban
+      const id_ve_ban = req.query.id_ve_ban
       const findAllVeBansData = await this.VeBanRepository.findById(id_ve_ban)
       return this.setCode(200).setData(findAllVeBansData).setMessage('Success').responseSuccess(res)
     } catch (error) {

@@ -74,9 +74,29 @@ export class VeBansController extends BaseController {
   @Get('/xacnhanthongtinve')
   async xacNhanThongTinVe(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const id_ve = req.query.id_ve
-      const findAllVeBansData = await this.VeBanRepository.xacNhanThongTinVe(id_ve)
-      return this.setCode(200).setData(findAllVeBansData).setMessage('Success').responseSuccess(res)
+      const id_suat_chieu = req.query.id_suat_chieu
+      const id_ghe_ngoi = req.query.id_ghe_ngoi
+
+      const findAllVeBansData = await this.VeBanRepository.xacNhanThongTinVe(
+        id_suat_chieu,
+        id_ghe_ngoi,
+      )
+      const a = []
+      for (let i = 0; i < findAllVeBansData.length; i++) {
+        a.push(findAllVeBansData[i].ten_the_loai)
+      }
+      const data = {
+        ten_phim: findAllVeBansData[0].ten_phim,
+        ten_the_loai: a,
+        ten_phong_chieu: findAllVeBansData[0].ten_phong_chieu,
+        day_so: findAllVeBansData[0].day_so,
+        hang_so: findAllVeBansData[0].hang_so,
+        ten_dinh_dang: findAllVeBansData[0].trn_dinh_dang,
+        gio_bat_dau: findAllVeBansData[0].gio_bat_dau,
+        gio_ket_thuc: findAllVeBansData[0].gio_ket_thuc,
+        thoi_luong_phim: findAllVeBansData[0].thoi_luong_phim,
+      }
+      return this.setCode(200).setData(data).setMessage('Success').responseSuccess(res)
     } catch (error) {
       return this.setData({})
         .setCode(error?.status || 500)
@@ -100,6 +120,34 @@ export class VeBansController extends BaseController {
         return this.setCode(200)
           .setData(data)
           .setMessage('Them moi ve ban successfully')
+          .responseSuccess(res)
+      } else {
+        return this.setData({})
+          .setCode(500)
+          .setMessage('Ve da duoc mua hoac dang xem')
+          .responseErrors(res)
+      }
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
+  @Put('/updateghedangxem')
+  async DangXem(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+    try {
+      const data: UpdateDto = req.body
+      const status = await this.VeBanRepository.checkTrangThai(data.id_suat_chieu, data.id_ghe_ngoi)
+      if (status[0].trang_thai == 0) {
+        const gheDangXem10p = await this.VeBanRepository.gheDangXem10p(
+          data.id_suat_chieu,
+          data.id_ghe_ngoi,
+        )
+        return this.setCode(200)
+          .setData(data)
+          .setMessage('Cap nhat ghe dang xem successfully')
           .responseSuccess(res)
       } else {
         return this.setData({})

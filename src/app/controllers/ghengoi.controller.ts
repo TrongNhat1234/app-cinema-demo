@@ -62,6 +62,23 @@ export class GheNgoisController extends BaseController {
     }
   }
 
+  @Get('/suatchieu')
+  async getGheSuatChieu(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const idSuatChieu = req.query.id_suat_chieu
+      const findAllGheNgoisData = await this.GheNgoiRepository.getGheSuatChieu(idSuatChieu)
+      return this.setCode(200)
+        .setData(findAllGheNgoisData)
+        .setMessage('Success')
+        .responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
   @Get('/chuamuas')
   async getGheChuaMua(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {

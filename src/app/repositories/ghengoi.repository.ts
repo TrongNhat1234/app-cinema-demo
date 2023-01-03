@@ -44,6 +44,13 @@ class GheNgoiRepository
     )
     return ghes
   }
+
+  async getGheSuatChieu(idSuatChieu: number) {
+    const ghes = await DB.sequelize.query('call ds_ghe_phim_suatchieu( ' + idSuatChieu + '  )', {
+      type: QueryTypes.CALL,
+    })
+    return ghes
+  }
 }
 
 export default GheNgoiRepository

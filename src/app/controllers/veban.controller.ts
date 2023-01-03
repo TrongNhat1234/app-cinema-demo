@@ -79,8 +79,9 @@ export class VeBansController extends BaseController {
       if (isEmpty(data.id_khach_hang)) {
         data.id_khach_hang = null
       }
-      const status = (await this.VeBanRepository.findById(data.id)).trang_thai
-      if (status != 1) {
+      const status = await this.VeBanRepository.checkTrangThai(data.id_suat_chieu, data.id_ghe_ngoi)
+      console.log(status[0].trang_thai)
+      if (status[0].trang_thai != 1) {
         const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data)
         return this.setCode(200)
           .setData(data)
@@ -110,12 +111,16 @@ export class VeBansController extends BaseController {
         so_dien_thoai.so_dien_thoai,
       )
       const data: UpdateDto = {
-        id: req.body.id,
+        id_suat_chieu: req.body.id_suat_chieu,
+        id_ghe_ngoi: req.body.id_ghe_ngoi,
         id_khach_hang: kh[0].id,
       }
       console.log(data)
-      const status = (await this.VeBanRepository.findById(data.id)).trang_thai
-      if (status != 1) {
+      const status: number = await this.VeBanRepository.checkTrangThai(
+        data.id_suat_chieu,
+        data.id_ghe_ngoi,
+      )
+      if (status[0].trang_thai != 1) {
         const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data)
         return this.setCode(200)
           .setData(data)

@@ -25,13 +25,29 @@ class VeBanRepository extends BaseRepository<VeBan> implements VeBanRepositoryIn
         this.modelName() +
         ' set trang_thai = 1, id_khach_hang = ' +
         object.id_khach_hang +
-        ' where id = ' +
-        object.id,
+        ' where id_suat_chieu = ' +
+        object.id_suat_chieu +
+        ' and id_ghe_ngoi = ' +
+        object.id_ghe_ngoi,
       {
         type: QueryTypes.UPDATE,
       },
     )
     return a
+  }
+
+  async checkTrangThai(id_suat_chieu: number, id_ghe_ngoi: number) {
+    return await DB.sequelize.query(
+      'SELECT trang_thai FROM ' +
+        this.modelName() +
+        ' where is_delete = 0 and id_suat_chieu = ' +
+        id_suat_chieu +
+        ' and id_ghe_ngoi = ' +
+        id_ghe_ngoi,
+      {
+        type: QueryTypes.SELECT,
+      },
+    )
   }
 }
 

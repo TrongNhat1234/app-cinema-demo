@@ -9,5 +9,10 @@ export class UpdateDto {
   @Expose()
   @IsNotEmpty()
   @IsNumber()
-  id: number
+  id_ghe_ngoi: number
+
+  @Expose()
+  @IsNotEmpty()
+  @IsNumber()
+  id_suat_chieu: number
 }

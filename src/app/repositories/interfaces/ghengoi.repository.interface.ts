@@ -5,4 +5,5 @@ export interface GheNgoiRepositoryInterface<M extends Model> extends BaseReposit
   getGheDaMua(idSuatChieu: number)
   getGheChuaMua(idSuatChieu: number)
   getGheDangChon(idSuatChieu: number)
+  getGheSuatChieu(idSuatChieu: number)
 }

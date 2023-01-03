@@ -49,6 +49,12 @@ class VeBanRepository extends BaseRepository<VeBan> implements VeBanRepositoryIn
       },
     )
   }
+
+  async xacNhanThongTinVe(id_ve: number) {
+    return await DB.sequelize.query('call xac_nhan_thong_tin_ve(' + id_ve + ')', {
+      type: QueryTypes.CALL,
+    })
+  }
 }
 
 export default VeBanRepository

@@ -71,6 +71,20 @@ export class VeBansController extends BaseController {
     }
   }
 
+  @Get('/xacnhanthongtinve')
+  async xacNhanThongTinVe(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const id_ve = req.query.id_ve
+      const findAllVeBansData = await this.VeBanRepository.xacNhanThongTinVe(id_ve)
+      return this.setCode(200).setData(findAllVeBansData).setMessage('Success').responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
   @UseBefore(NVMiddleware)
   @Put('/updatenv')
   async DatVeVeBanNV(@Req() req: Request, @Res() res: Response, next: NextFunction) {

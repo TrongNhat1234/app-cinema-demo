@@ -36,11 +36,13 @@ class VeBanRepository extends BaseRepository<VeBan> implements VeBanRepositoryIn
     return a
   }
 
-  async gheDangXem10p(id_suat_chieu: number, id_ghe_ngoi: number) {
+  async gheDangXem10p(id_suat_chieu: number, id_ghe_ngoi: number, trang_thai: number) {
     const a = await DB.sequelize.query(
       'UPDATE ' +
         this.modelName() +
-        ' set trang_thai = 2 where id_suat_chieu = ' +
+        ' set trang_thai = ' +
+        trang_thai +
+        ' where id_suat_chieu = ' +
         id_suat_chieu +
         ' and id_ghe_ngoi = ' +
         id_ghe_ngoi,

@@ -140,10 +140,22 @@ export class VeBansController extends BaseController {
     try {
       const data: UpdateDto = req.body
       const status = await this.VeBanRepository.checkTrangThai(data.id_suat_chieu, data.id_ghe_ngoi)
+      console.log(status[0].trang_thai)
       if (status[0].trang_thai == 0) {
         const gheDangXem10p = await this.VeBanRepository.gheDangXem10p(
           data.id_suat_chieu,
           data.id_ghe_ngoi,
+          2,
+        )
+        return this.setCode(200)
+          .setData(data)
+          .setMessage('Cap nhat ghe dang xem successfully')
+          .responseSuccess(res)
+      } else if (status[0].trang_thai == 2) {
+        const gheDangXem10p = await this.VeBanRepository.gheDangXem10p(
+          data.id_suat_chieu,
+          data.id_ghe_ngoi,
+          0,
         )
         return this.setCode(200)
           .setData(data)

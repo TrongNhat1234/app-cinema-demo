@@ -91,11 +91,60 @@ export class VeBansController extends BaseController {
         ten_phong_chieu: findAllVeBansData[0].ten_phong_chieu,
         day_so: findAllVeBansData[0].day_so,
         hang_so: findAllVeBansData[0].hang_so,
-        ten_dinh_dang: findAllVeBansData[0].trn_dinh_dang,
+        ten_dinh_dang: findAllVeBansData[0].ten_dinh_dang,
         gio_bat_dau: findAllVeBansData[0].gio_bat_dau,
         gio_ket_thuc: findAllVeBansData[0].gio_ket_thuc,
         thoi_luong_phim: findAllVeBansData[0].thoi_luong_phim,
       }
+      return this.setCode(200).setData(data).setMessage('Success').responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
+  @Get('/xacnhanthongtinve2')
+  async xacNhanThongTinVe2(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      let data = {}
+      console.log(data)
+      const list_id_ghe_ngoi = req.query.id_ghe_ngoi
+      const id_suat_chieu = req.query.id_suat_chieu
+      const ghe = []
+      const listghe = list_id_ghe_ngoi.split(',')
+      const a = []
+      for (let i = 0; i < listghe.length; ++i) {
+        const findAllVeBansData = await this.VeBanRepository.xacNhanThongTinVe(
+          id_suat_chieu,
+          listghe[i],
+        )
+        if (i == 0) {
+          for (let i2 = 0; i2 < findAllVeBansData.length; i2++) {
+            a.push(findAllVeBansData[i2].ten_the_loai)
+          }
+        }
+
+        const b = []
+        b.push(findAllVeBansData[i].hang_so)
+        b.push(findAllVeBansData[i].day_so)
+        ghe.push(b)
+        const c = listghe.length - 1
+        if (i == c) {
+          data = {
+            ten_phim: findAllVeBansData[0].ten_phim,
+            ten_the_loai: a,
+            ten_phong_chieu: findAllVeBansData[0].ten_phong_chieu,
+            ghe_so: ghe,
+            ten_dinh_dang: findAllVeBansData[0].ten_dinh_dang,
+            gio_bat_dau: findAllVeBansData[0].gio_bat_dau,
+            gio_ket_thuc: findAllVeBansData[0].gio_ket_thuc,
+            thoi_luong_phim: findAllVeBansData[0].thoi_luong_phim,
+          }
+        }
+      }
+      console.log(data)
       return this.setCode(200).setData(data).setMessage('Success').responseSuccess(res)
     } catch (error) {
       return this.setData({})

@@ -115,10 +115,10 @@ export class PhimsController extends BaseController {
   }
 
   @UseBefore(AdminMiddleware)
-  @Put('/delete/id')
+  @Put('/delete')
   async delete(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const id = parseInt(req.query.id, 10)
+      const id = parseInt(req.body.id, 10)
       const findPhimData = await this.PhimRepository.findById(id)
       if (!isEmpty(findPhimData)) {
         const ass = await this.PhimRepository.deleteById(id)

@@ -111,10 +111,10 @@ export class HoaDonDoAnsController extends BaseController {
     }
   }
   @UseBefore(NVMiddleware)
-  @Put('/delete/id')
+  @Put('/delete')
   async deleteHoaDonDoAn(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const id = req.query.id
+      const id = req.body.id
       const HoaDonDoAn = await this.HoaDonDoAnRepository.deleteById(id)
 
       return this.setCode(200)

@@ -4,7 +4,16 @@ import { NextFunction, Response, Request } from 'express'
 import { LoginDto } from '../../dtos/auth.dto'
 import NhanVienRepository from '@repositories/nhanvien.repository'
 import { BaseController } from './base.controller'
-import { BadRequestError, Body, Get, JsonController, Post, Req, Res } from 'routing-controllers'
+import {
+  BadRequestError,
+  UseBefore,
+  Body,
+  Get,
+  JsonController,
+  Post,
+  Req,
+  Res,
+} from 'routing-controllers'
 import { Service } from 'typedi'
 import { setCacheExpire, getCacheExpire } from '@services/redis'
 import { createAccessToken, createRefreshToken, verifyToken } from '@utils/token'
@@ -13,6 +22,10 @@ import { ethers } from 'ethers'
 import { REFRESH_TTL } from '@utils/constants'
 import random from '@utils/random'
 import { IAccessToken } from '@interfaces/token.interface'
+import { NVMiddleware } from '@middlewares/nv.middleware'
+import { AuthMiddleware } from '@middlewares/authkh.middleware'
+import { AdminMiddleware } from '@middlewares/admin.middleware'
+import { CreateDto } from '../../dtos/nhanvien.dto'
 
 @JsonController('/authnv')
 @Service()
@@ -53,6 +66,26 @@ class AuthNvController extends BaseController {
       return this.setData({})
         .setCode(error?.status || 500)
         .setMessage(error?.message || 'Internal server error')
+        .responseErrors(res)
+    }
+  }
+
+  @UseBefore(AdminMiddleware)
+  @Post('/create')
+  async createPhim(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+    try {
+      const data: CreateDto = req.body
+      console.log(data)
+      const NhanVien = await this.authnvRepository.createNV(data)
+
+      return this.setCode(200)
+        .setData(data)
+        .setMessage('Create nhanvien successfully')
+        .responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
         .responseErrors(res)
     }
   }

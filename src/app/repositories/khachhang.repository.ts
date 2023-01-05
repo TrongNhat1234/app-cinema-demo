@@ -34,6 +34,12 @@ class KhachHangRepository
       },
     )
   }
+  async getVeCuaKhachHang(id: number) {
+    const listve = await DB.sequelize.query('call ve_cua_khach_hang(' + id + '  )', {
+      type: QueryTypes.CALL,
+    })
+    return listve
+  }
 
   async findOrCreateByEmail(so_dien_thoai: string, password: string) {
     console.log(this.modelName())

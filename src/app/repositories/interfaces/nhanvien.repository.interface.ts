@@ -5,4 +5,5 @@ export interface NhanVienRepositoryInterface<M extends Model> extends BaseReposi
   findByEmail(email: string)
   findByEmailPassWord(email: string, password: string)
   findByEmailRole(email: string)
+  createNV(object: any)
 }

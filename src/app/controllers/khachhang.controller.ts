@@ -4,6 +4,8 @@ import { NextFunction, Response, Request } from 'express'
 import { LoginDto } from '../../dtos/khachhang.dto'
 import KhachHangRepository from '@repositories/khachhang.repository'
 import { BaseController } from './base.controller'
+import { NVMiddleware } from '@middlewares/nv.middleware'
+import { AuthMiddleware } from '@middlewares/authkh.middleware'
 import {
   BadRequestError,
   Body,
@@ -23,6 +25,8 @@ import { ethers } from 'ethers'
 import { REFRESH_TTL } from '@utils/constants'
 import { AdminMiddleware } from '@middlewares/admin.middleware'
 import { AuthRequest } from '@interfaces/response.interface'
+import jwt from 'jsonwebtoken'
+import { env } from '@env'
 
 @JsonController('/khachhangs')
 @Service()
@@ -62,6 +66,28 @@ class KhachHangController extends BaseController {
       return this.setData({})
         .setCode(error?.status || 500)
         .setMessage(error?.message || 'Internal server error')
+        .responseErrors(res)
+    }
+  }
+
+  @UseBefore(AuthMiddleware)
+  @Get('/listve')
+  async getVeKhachHang(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const accessToken = req.headers.authorization.split('Bearer ')[1].trim()
+      const so_dien_thoai = await jwt.verify(accessToken, env.app.jwt_secret as jwt.Secret)
+      const kh = await new KhachHangRepository(KhachHang).findBySoDienThoai(
+        so_dien_thoai.so_dien_thoai,
+      )
+      const findAllVeKhachHangsData = await this.KhachHangRepository.getVeCuaKhachHang(kh[0].id)
+      return this.setCode(200)
+        .setData(findAllVeKhachHangsData)
+        .setMessage('Success')
+        .responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
         .responseErrors(res)
     }
   }

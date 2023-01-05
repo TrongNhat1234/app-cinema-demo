@@ -54,6 +54,34 @@ class NhanVienRepository
     )
     return nhanvien
   }
+
+  async createNV(object: any) {
+    const a = await DB.sequelize.query(
+      'INSERT INTO ' +
+        this.modelName() +
+        " (vai_tro, mat_khau,gioi_tinh,ngay_vao_lam,email,dia_chi,ngay_sinh,ho_ten) VALUES ('" +
+        object.vai_tro +
+        "', '" +
+        object.mat_khau +
+        "', " +
+        object.gioi_tinh +
+        ", '" +
+        object.ngay_vao_lam +
+        "', '" +
+        object.email +
+        "', '" +
+        object.dia_chi +
+        "', '" +
+        object.ngay_sinh +
+        "', '" +
+        object.ho_ten +
+        "')",
+      {
+        type: QueryTypes.INSERT,
+      },
+    )
+    return a
+  }
 }
 
 export default NhanVienRepository

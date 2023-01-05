@@ -162,20 +162,30 @@ export class VeBansController extends BaseController {
       if (isEmpty(data.id_khach_hang)) {
         data.id_khach_hang = null
       }
-      const status = await this.VeBanRepository.checkTrangThai(data.id_suat_chieu, data.id_ghe_ngoi)
-      console.log(status[0].trang_thai)
-      if (status[0].trang_thai != 1) {
-        const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data)
-        return this.setCode(200)
-          .setData(data)
-          .setMessage('Them moi ve ban successfully')
-          .responseSuccess(res)
-      } else {
-        return this.setData({})
-          .setCode(500)
-          .setMessage('Ve da duoc mua hoac dang xem')
-          .responseErrors(res)
+      for (let i = 0; i < data.id_ghe_ngoi.length; i++) {
+        const status = await this.VeBanRepository.checkTrangThai(
+          data.id_suat_chieu,
+          data.id_ghe_ngoi[i],
+        )
+        console.log(status[0].trang_thai)
+        if (status[0].trang_thai != 1) {
+          const data2 = {
+            id_suat_chieu: data.id_suat_chieu,
+            id_ghe_ngoi: data.id_ghe_ngoi[i],
+            id_khach_hang: data.id_khach_hang,
+          }
+          const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data2)
+        } else {
+          return this.setData({})
+            .setCode(500)
+            .setMessage('Ve da duoc mua hoac dang xem')
+            .responseErrors(res)
+        }
       }
+      return this.setCode(200)
+        .setData(data)
+        .setMessage('Them moi ve ban successfully')
+        .responseSuccess(res)
     } catch (error) {
       return this.setData({})
         .setCode(error?.status || 500)
@@ -238,23 +248,30 @@ export class VeBansController extends BaseController {
         id_ghe_ngoi: req.body.id_ghe_ngoi,
         id_khach_hang: kh[0].id,
       }
-      console.log(data)
-      const status: number = await this.VeBanRepository.checkTrangThai(
-        data.id_suat_chieu,
-        data.id_ghe_ngoi,
-      )
-      if (status[0].trang_thai != 1) {
-        const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data)
-        return this.setCode(200)
-          .setData(data)
-          .setMessage('Them moi ve ban successfully')
-          .responseSuccess(res)
-      } else {
-        return this.setData({})
-          .setCode(500)
-          .setMessage('Ve da duoc mua hoac dang xem')
-          .responseErrors(res)
+      for (let i = 0; i < data.id_ghe_ngoi.length; i++) {
+        const status = await this.VeBanRepository.checkTrangThai(
+          data.id_suat_chieu,
+          data.id_ghe_ngoi[i],
+        )
+        console.log(status[0].trang_thai)
+        if (status[0].trang_thai != 1) {
+          const data2 = {
+            id_suat_chieu: data.id_suat_chieu,
+            id_ghe_ngoi: data.id_ghe_ngoi[i],
+            id_khach_hang: data.id_khach_hang,
+          }
+          const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data2)
+        } else {
+          return this.setData({})
+            .setCode(500)
+            .setMessage('Ve da duoc mua hoac dang xem')
+            .responseErrors(res)
+        }
       }
+      return this.setCode(200)
+        .setData(data)
+        .setMessage('Them moi ve ban successfully')
+        .responseSuccess(res)
     } catch (error) {
       return this.setData({})
         .setCode(error?.status || 500)

@@ -1,4 +1,6 @@
+import { NhanVien } from '@models/entities/nhanvien.entity'
 import { KhachHang } from '@models/entities/khachhang.entity'
+
 import { isEmpty } from './../../common/utils/util'
 import VeBan from '@models/entities/veban.entity'
 
@@ -17,6 +19,7 @@ import { NextFunction, Response, Request } from 'express'
 import { BaseController } from './base.controller'
 import { Service } from 'typedi'
 import VeBanRepository from '@repositories/veban.repository'
+import NhanVienRepository from '@repositories/nhanvien.repository'
 import KhachHangRepository from '@repositories/khachhang.repository'
 
 import { NVMiddleware } from '@middlewares/nv.middleware'
@@ -154,6 +157,46 @@ export class VeBansController extends BaseController {
     }
   }
 
+  @UseBefore(AuthMiddleware)
+  @Put('/updatekh')
+  async DatVeVeBanKH(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+    try {
+      const data: UpdateDto = req.body
+      if (isEmpty(data.id_khach_hang)) {
+        data.id_khach_hang = null
+      }
+      for (let i = 0; i < data.id_ghe_ngoi.length; i++) {
+        const status = await this.VeBanRepository.checkTrangThai(
+          data.id_suat_chieu,
+          data.id_ghe_ngoi[i],
+        )
+        console.log(status[0].trang_thai)
+        if (status[0].trang_thai != 1 && !isEmpty(status[0].id_khach_hang)) {
+          const data2 = {
+            id_suat_chieu: data.id_suat_chieu,
+            id_ghe_ngoi: data.id_ghe_ngoi[i],
+            id_khach_hang: data.id_khach_hang,
+          }
+          const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data2)
+        } else {
+          return this.setData({})
+            .setCode(500)
+            .setMessage('Ve da duoc mua hoac dang xem')
+            .responseErrors(res)
+        }
+      }
+      return this.setCode(200)
+        .setData(data)
+        .setMessage('Them moi ve ban successfully')
+        .responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
   @UseBefore(NVMiddleware)
   @Put('/updatenv')
   async DatVeVeBanNV(@Req() req: Request, @Res() res: Response, next: NextFunction) {
@@ -168,7 +211,7 @@ export class VeBansController extends BaseController {
           data.id_ghe_ngoi[i],
         )
         console.log(status[0].trang_thai)
-        if (status[0].trang_thai != 1) {
+        if (status[0].trang_thai != 1 && !isEmpty(status[0].id_nhan_vien)) {
           const data2 = {
             id_suat_chieu: data.id_suat_chieu,
             id_ghe_ngoi: data.id_ghe_ngoi[i],
@@ -194,36 +237,38 @@ export class VeBansController extends BaseController {
     }
   }
 
-  @Put('/updateghedangxem')
-  async DangXem(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+  @UseBefore(NVMiddleware)
+  @Put('/updateghedangxemnhanvien')
+  async DangXemNhanVien(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const data: UpdateDto = req.body
-      const status = await this.VeBanRepository.checkTrangThai(data.id_suat_chieu, data.id_ghe_ngoi)
-      console.log(status[0].trang_thai)
-      if (status[0].trang_thai == 0) {
-        const gheDangXem10p = await this.VeBanRepository.gheDangXem10p(
-          data.id_suat_chieu,
-          data.id_ghe_ngoi,
-          2,
-        )
+      const accessToken = req.headers.authorization.split('Bearer ')[1].trim()
+      const email = await jwt.verify(accessToken, env.app.jwt_secret as jwt.Secret).email
+      const nv = await new NhanVienRepository(NhanVien).findByEmailRole(email)
+      const id_nhan_vien = nv[0].id
+      const id_suat_chieu = req.body.id_suat_chieu
+      const id_ghe_ngoi = req.body.id_ghe_ngoi
+      const data = {
+        id_nhan_vien,
+        id_suat_chieu,
+        id_ghe_ngoi,
+      }
+      const check = await this.VeBanRepository.checkTrangThai(id_suat_chieu, id_ghe_ngoi)
+      if (isEmpty(check[0].id_khach_hang) && check[0].id_nhan_vien == id_nhan_vien) {
+        await this.VeBanRepository.ChonGheNhanVien(id_suat_chieu, id_ghe_ngoi, id_nhan_vien)
         return this.setCode(200)
           .setData(data)
-          .setMessage('Cap nhat ghe dang xem successfully')
+          .setMessage('Chon ghe Nhan Vien successfully')
           .responseSuccess(res)
-      } else if (status[0].trang_thai == 2) {
-        const gheDangXem10p = await this.VeBanRepository.gheDangXem10p(
-          data.id_suat_chieu,
-          data.id_ghe_ngoi,
-          0,
-        )
+      } else if (isEmpty(check[0].id_khach_hang) && isEmpty(check[0].id_nhan_vien)) {
+        await this.VeBanRepository.ChonGheNhanVien(id_suat_chieu, id_ghe_ngoi, id_nhan_vien)
         return this.setCode(200)
           .setData(data)
-          .setMessage('Cap nhat ghe dang xem successfully')
+          .setMessage('Chon ghe Nhan Vien successfully')
           .responseSuccess(res)
       } else {
         return this.setData({})
           .setCode(500)
-          .setMessage('Ve da duoc mua hoac dang xem')
+          .setMessage('loi! Ghe Dang Duoc Xem')
           .responseErrors(res)
       }
     } catch (error) {
@@ -235,42 +280,46 @@ export class VeBansController extends BaseController {
   }
 
   @UseBefore(AuthMiddleware)
-  @Put('/updatekh')
-  async DatVeVeBanKH(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+  @Put('/updateghedangxemkhachhang')
+  async DangXemKhachHang(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const accessToken = req.headers.authorization.split('Bearer ')[1].trim()
       const so_dien_thoai = await jwt.verify(accessToken, env.app.jwt_secret as jwt.Secret)
       const kh = await new KhachHangRepository(KhachHang).findBySoDienThoai(
         so_dien_thoai.so_dien_thoai,
       )
-      const data: UpdateDto = {
-        id_suat_chieu: req.body.id_suat_chieu,
-        id_ghe_ngoi: req.body.id_ghe_ngoi,
-        id_khach_hang: kh[0].id,
+      const id_khach_hang = kh[0].id
+      const id_suat_chieu = req.body.id_suat_chieu
+      const id_ghe_ngoi = req.body.id_ghe_ngoi
+      const data = {
+        id_khach_hang,
+        id_suat_chieu,
+        id_ghe_ngoi,
       }
-      for (let i = 0; i < data.id_ghe_ngoi.length; i++) {
-        const status = await this.VeBanRepository.checkTrangThai(
-          data.id_suat_chieu,
-          data.id_ghe_ngoi[i],
-        )
-        console.log(status[0].trang_thai)
-        if (status[0].trang_thai != 1) {
-          const data2 = {
-            id_suat_chieu: data.id_suat_chieu,
-            id_ghe_ngoi: data.id_ghe_ngoi[i],
-            id_khach_hang: data.id_khach_hang,
-          }
-          const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data2)
-        } else {
-          return this.setData({})
-            .setCode(500)
-            .setMessage('Ve da duoc mua hoac dang xem')
-            .responseErrors(res)
-        }
+      const check = await this.VeBanRepository.checkTrangThai(id_suat_chieu, id_ghe_ngoi)
+      if (isEmpty(check[0].id_nhan_vien) && check[0].id_khach_hang == id_khach_hang) {
+        await this.VeBanRepository.ChonGheKhachHang(id_suat_chieu, id_ghe_ngoi, id_khach_hang)
+        return this.setCode(200)
+          .setData(data)
+          .setMessage('Chon ghe Khach Hang successfully')
+          .responseSuccess(res)
+      } else if (isEmpty(check[0].id_nhan_vien) && isEmpty(check[0].id_khach_hang)) {
+        await this.VeBanRepository.ChonGheKhachHang(id_suat_chieu, id_ghe_ngoi, id_khach_hang)
+        return this.setCode(200)
+          .setData(data)
+          .setMessage('Chon ghe KhacHang successfully')
+          .responseSuccess(res)
+      } else {
+        return this.setData({})
+          .setCode(500)
+          .setMessage('loi! Ghe Dang Duoc Xem')
+          .responseErrors(res)
       }
+      console.log(data)
+      await this.VeBanRepository.ChonGheKhachHang(id_suat_chieu, id_ghe_ngoi, id_khach_hang)
       return this.setCode(200)
         .setData(data)
-        .setMessage('Them moi ve ban successfully')
+        .setMessage('Chon ghe khach hang successfully')
         .responseSuccess(res)
     } catch (error) {
       return this.setData({})
@@ -280,5 +329,51 @@ export class VeBansController extends BaseController {
     }
   }
 }
+
+// @UseBefore(AuthMiddleware)
+// @Put('/updatekh')
+// async DatVeVeBanKH(@Req() req: Request, @Res() res: Response, next: NextFunction) {
+//   try {
+//     const accessToken = req.headers.authorization.split('Bearer ')[1].trim()
+//     const so_dien_thoai = await jwt.verify(accessToken, env.app.jwt_secret as jwt.Secret)
+//     const kh = await new KhachHangRepository(KhachHang).findBySoDienThoai(
+//       so_dien_thoai.so_dien_thoai,
+//     )
+//     const data: UpdateDto = {
+//       id_suat_chieu: req.body.id_suat_chieu,
+//       id_ghe_ngoi: req.body.id_ghe_ngoi,
+//       id_khach_hang: kh[0].id,
+//     }
+//     for (let i = 0; i < data.id_ghe_ngoi.length; i++) {
+//       const status = await this.VeBanRepository.checkTrangThai(
+//         data.id_suat_chieu,
+//         data.id_ghe_ngoi[i],
+//       )
+//       console.log(status[0].trang_thai)
+//       if (status[0].trang_thai != 1) {
+//         const data2 = {
+//           id_suat_chieu: data.id_suat_chieu,
+//           id_ghe_ngoi: data.id_ghe_ngoi[i],
+//           id_khach_hang: data.id_khach_hang,
+//         }
+//         const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data2)
+//       } else {
+//         return this.setData({})
+//           .setCode(500)
+//           .setMessage('Ve da duoc mua hoac dang xem')
+//           .responseErrors(res)
+//       }
+//     }
+//     return this.setCode(200)
+//       .setData(data)
+//       .setMessage('Them moi ve ban successfully')
+//       .responseSuccess(res)
+//   } catch (error) {
+//     return this.setData({})
+//       .setCode(error?.status || 500)
+//       .setMessage('Error')
+//       .responseErrors(res)
+//   }
+// }
 
 export default VeBansController

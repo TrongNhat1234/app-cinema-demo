@@ -31,7 +31,7 @@ module.exports = {
         },
       },
       id_nhan_vien: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'nhanviens',
@@ -39,7 +39,7 @@ module.exports = {
         },
       },
       id_khach_hang: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER,
         references: {
           model: 'khachhangs',

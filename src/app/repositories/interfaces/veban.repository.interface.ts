@@ -5,5 +5,6 @@ export interface VeBanRepositoryInterface<M extends Model> extends BaseRepositor
   DatVeVeBanNV(data: any)
   checkTrangThai(id_suat_chieu: number, id_ghe_ngoi: number)
   xacNhanThongTinVe(id_suat_chieu: number, id_ghe_ngoi: number)
-  gheDangXem10p(id_suat_chieu: number, id_ghe_ngoi: number, trang_thai: number)
+  ChonGheKhachHang(id_suat_chieu: number, id_ghe_ngoi: number, id_khach_hang: number)
+  ChonGheNhanVien(id_suat_chieu: number, id_ghe_ngoi: number, id_nhan_vien: number)
 }

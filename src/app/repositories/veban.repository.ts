@@ -36,18 +36,21 @@ class VeBanRepository extends BaseRepository<VeBan> implements VeBanRepositoryIn
     return a
   }
 
-  async gheDangXem10p(id_suat_chieu: number, id_ghe_ngoi: number, trang_thai: number) {
+  async ChonGheKhachHang(id_suat_chieu: number, id_ghe_ngoi: number, id_khach_hang: number) {
     const a = await DB.sequelize.query(
-      'UPDATE ' +
-        this.modelName() +
-        ' set trang_thai = ' +
-        trang_thai +
-        ' where id_suat_chieu = ' +
-        id_suat_chieu +
-        ' and id_ghe_ngoi = ' +
-        id_ghe_ngoi,
+      'call chon_ghe_khach_hang(' + id_suat_chieu + ',' + id_ghe_ngoi + ',' + id_khach_hang + ')',
       {
-        type: QueryTypes.UPDATE,
+        type: QueryTypes.CALL,
+      },
+    )
+    return a
+  }
+
+  async ChonGheNhanVien(id_suat_chieu: number, id_ghe_ngoi: number, id_nhan_vien: number) {
+    const a = await DB.sequelize.query(
+      'call chon_ghe_nhan_vien(' + id_suat_chieu + ',' + id_ghe_ngoi + ',' + id_nhan_vien + ')',
+      {
+        type: QueryTypes.CALL,
       },
     )
     return a
@@ -55,7 +58,7 @@ class VeBanRepository extends BaseRepository<VeBan> implements VeBanRepositoryIn
 
   async checkTrangThai(id_suat_chieu: number, id_ghe_ngoi: number) {
     return await DB.sequelize.query(
-      'SELECT trang_thai FROM ' +
+      'SELECT*FROM ' +
         this.modelName() +
         ' where is_delete = 0 and id_suat_chieu = ' +
         id_suat_chieu +

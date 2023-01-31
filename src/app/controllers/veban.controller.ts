@@ -162,9 +162,6 @@ export class VeBansController extends BaseController {
   async DatVeVeBanKH(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const data: UpdateDto = req.body
-      if (isEmpty(data.id_khach_hang)) {
-        data.id_khach_hang = null
-      }
       for (let i = 0; i < data.id_ghe_ngoi.length; i++) {
         const status = await this.VeBanRepository.checkTrangThai(
           data.id_suat_chieu,
@@ -175,7 +172,6 @@ export class VeBansController extends BaseController {
           const data2 = {
             id_suat_chieu: data.id_suat_chieu,
             id_ghe_ngoi: data.id_ghe_ngoi[i],
-            id_khach_hang: data.id_khach_hang,
           }
           const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data2)
         } else {
@@ -201,10 +197,6 @@ export class VeBansController extends BaseController {
   @Put('/updatenv')
   async DatVeVeBanNV(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
-      const data: UpdateDto = req.body
-      if (isEmpty(data.id_khach_hang)) {
-        data.id_khach_hang = null
-      }
       for (let i = 0; i < data.id_ghe_ngoi.length; i++) {
         const status = await this.VeBanRepository.checkTrangThai(
           data.id_suat_chieu,
@@ -215,7 +207,6 @@ export class VeBansController extends BaseController {
           const data2 = {
             id_suat_chieu: data.id_suat_chieu,
             id_ghe_ngoi: data.id_ghe_ngoi[i],
-            id_khach_hang: data.id_khach_hang,
           }
           const DatVeVeBanNV = await this.VeBanRepository.DatVeVeBanNV(data2)
         } else {

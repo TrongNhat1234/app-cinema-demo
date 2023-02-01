@@ -88,6 +88,7 @@ export class VeBansController extends BaseController {
       for (let i = 0; i < findAllVeBansData.length; i++) {
         a.push(findAllVeBansData[i].ten_the_loai)
       }
+      console.log(a)
       const data = {
         ten_phim: findAllVeBansData[0].ten_phim,
         ten_the_loai: a,
@@ -128,10 +129,10 @@ export class VeBansController extends BaseController {
             a.push(findAllVeBansData[i2].ten_the_loai)
           }
         }
-
         const b = []
-        b.push(findAllVeBansData[i].hang_so)
-        b.push(findAllVeBansData[i].day_so)
+        console.log(findAllVeBansData[0].hang_so)
+        b.push(findAllVeBansData[0].hang_so)
+        b.push(findAllVeBansData[0].day_so)
         ghe.push(b)
         const c = listghe.length - 1
         if (i == c) {

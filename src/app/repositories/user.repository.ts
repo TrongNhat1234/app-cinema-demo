@@ -31,7 +31,11 @@ class UserRepository extends BaseRepository<User> implements UserRepositoryInter
       return customer
     } else {
       return await DB.sequelize.query(
-        "INSERT INTO users (email, password) VALUES ('" + email + "', '" + password + "')",
+        "INSERT INTO users (email, password,created_at,updated_at) VALUES ('" +
+          email +
+          "', '" +
+          password +
+          "',NOW(),NOW())",
         // "INSERT INTO `users` (email, password) VALUES('" + email + "','" + password + "')",
         {
           type: QueryTypes.INSERT,

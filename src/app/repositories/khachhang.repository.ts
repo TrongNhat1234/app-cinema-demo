@@ -59,11 +59,11 @@ class KhachHangRepository
       return await DB.sequelize.query(
         'INSERT INTO ' +
           this.modelName() +
-          " (so_dien_thoai, mat_khau) VALUES ('" +
+          " (so_dien_thoai, mat_khau,created_at,updated_at) VALUES ('" +
           so_dien_thoai +
           "', '" +
           password +
-          "')",
+          "',NOW(),NOW())",
         // "INSERT INTO `users` (email, password) VALUES('" + email + "','" + password + "')",
         {
           type: QueryTypes.INSERT,

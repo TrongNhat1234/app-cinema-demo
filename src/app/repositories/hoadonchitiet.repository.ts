@@ -51,13 +51,13 @@ class HoaDonChiTietRepository
     const a = await DB.sequelize.query(
       'INSERT INTO ' +
         this.modelName() +
-        ' ( id_hoa_don_do_an,id_do_an,so_luong) VALUES (' +
+        ' ( id_hoa_don_do_an,id_do_an,so_luong,created_at,updated_at) VALUES (' +
         object.id_hoa_don_do_an +
         ',' +
         object.id_do_an +
         ',' +
         object.so_luong +
-        ')',
+        ',NOW(),NOW())',
       {
         type: QueryTypes.INSERT,
       },
@@ -69,7 +69,7 @@ class HoaDonChiTietRepository
     const a = await DB.sequelize.query(
       'UPDATE ' +
         this.modelName() +
-        ' set so_luong = ' +
+        ' set updated_at = NOW(),so_luong = ' +
         object.so_luong +
         ' where id_hoa_don_do_an = ' +
         object.id_hoa_don_do_an +
@@ -86,7 +86,7 @@ class HoaDonChiTietRepository
     const a = await DB.sequelize.query(
       'UPDATE ' +
         this.modelName() +
-        ' set is_delete = 0 ,so_luong = ' +
+        ' set updated_at = NOW(),is_delete = 0 ,so_luong = ' +
         object.so_luong +
         ' where id_hoa_don_do_an = ' +
         object.id_hoa_don_do_an +
@@ -103,7 +103,7 @@ class HoaDonChiTietRepository
     const a = await DB.sequelize.query(
       'UPDATE ' +
         this.modelName() +
-        ' set is_delete = 1 where id_hoa_don_do_an = ' +
+        ' set updated_at = NOW(),is_delete = 1 where id_hoa_don_do_an = ' +
         object.id_hoa_don_do_an +
         ' and id_do_an = ' +
         object.id_do_an,

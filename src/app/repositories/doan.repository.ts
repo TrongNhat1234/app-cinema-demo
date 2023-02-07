@@ -23,13 +23,13 @@ class DoAnRepository extends BaseRepository<DoAn> implements DoAnRepositoryInter
     const a = await DB.sequelize.query(
       'INSERT INTO ' +
         this.modelName() +
-        " (ten_do_an, size,gia) VALUES ('" +
+        " (ten_do_an, size,gia,created_at,updated_at) VALUES ('" +
         object.ten_do_an +
         "', '" +
         object.size +
         "', " +
         object.gia +
-        ')',
+        ',NOW(),NOW())',
       {
         type: QueryTypes.INSERT,
       },

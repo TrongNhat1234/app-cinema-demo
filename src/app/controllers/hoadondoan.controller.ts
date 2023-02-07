@@ -96,8 +96,10 @@ export class HoaDonDoAnsController extends BaseController {
           data.giam_gia,
         )
 
+        const data2 = await this.HoaDonDoAnRepository.hoaDonVuaTao()
+        console.log('aaa' + data2)
         return this.setCode(200)
-          .setData(data)
+          .setData(data2)
           .setMessage('Create hoa don do an successfully')
           .responseSuccess(res)
       } else {

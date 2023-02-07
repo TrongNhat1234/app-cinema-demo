@@ -37,7 +37,7 @@ class SuatChieuRepository
     const a = await DB.sequelize.query(
       'INSERT INTO ' +
         this.modelName() +
-        " (gio_bat_dau, gio_ket_thuc,id_phim,id_phong_chieu,id_dinh_dang_phim,ngay_chieu) VALUES ('" +
+        " (gio_bat_dau, gio_ket_thuc,id_phim,id_phong_chieu,id_dinh_dang_phim,ngay_chieu,created_at,updated_at) VALUES ('" +
         object.gio_bat_dau +
         "', '" +
         object.gio_ket_thuc +
@@ -49,7 +49,7 @@ class SuatChieuRepository
         object.id_dinh_dang_phim +
         ", '" +
         object.ngay_chieu +
-        "')",
+        "',NOW(),NOW())",
       {
         type: QueryTypes.INSERT,
       },

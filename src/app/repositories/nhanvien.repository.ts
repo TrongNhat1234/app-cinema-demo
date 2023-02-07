@@ -59,7 +59,7 @@ class NhanVienRepository
     const a = await DB.sequelize.query(
       'INSERT INTO ' +
         this.modelName() +
-        " (vai_tro, mat_khau,gioi_tinh,ngay_vao_lam,email,dia_chi,ngay_sinh,ho_ten) VALUES ('" +
+        " (vai_tro, mat_khau,gioi_tinh,ngay_vao_lam,email,dia_chi,ngay_sinh,ho_ten,created_at,updated_at) VALUES ('" +
         object.vai_tro +
         "', '" +
         object.mat_khau +
@@ -75,7 +75,7 @@ class NhanVienRepository
         object.ngay_sinh +
         "', '" +
         object.ho_ten +
-        "')",
+        "',NOW(),NOW())",
       {
         type: QueryTypes.INSERT,
       },

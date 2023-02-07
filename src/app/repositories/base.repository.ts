@@ -60,7 +60,7 @@ export abstract class BaseRepository<M extends Model> implements BaseRepositoryI
 
   async deleteById(id: any) {
     return await DB.sequelize.query(
-      'update ' + this.modelName() + ' set is_delete = 1 where id = ' + id,
+      'update ' + this.modelName() + ' set is_delete = 1,updated_at = NOW() where id = ' + id,
       {
         type: QueryTypes.UPDATE,
       },

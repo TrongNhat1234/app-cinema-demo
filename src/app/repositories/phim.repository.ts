@@ -23,7 +23,7 @@ class PhimRepository extends BaseRepository<Phim> implements PhimRepositoryInter
     const a = await DB.sequelize.query(
       'INSERT INTO ' +
         this.modelName() +
-        " (ten_phim, thoi_luong_phim,gioi_han_tuoi,ngay_cong_chieu) VALUES ('" +
+        " (ten_phim, thoi_luong_phim,gioi_han_tuoi,ngay_cong_chieu,created_at,updated_at) VALUES ('" +
         object.ten_phim +
         "', '" +
         object.thoi_luong_phim +
@@ -31,7 +31,7 @@ class PhimRepository extends BaseRepository<Phim> implements PhimRepositoryInter
         object.gioi_han_tuoi +
         ",'" +
         object.ngay_cong_chieu +
-        "')",
+        "',NOW(),NOW())",
       {
         type: QueryTypes.INSERT,
       },

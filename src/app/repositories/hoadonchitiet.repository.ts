@@ -22,15 +22,9 @@ class HoaDonChiTietRepository
     return nameModel
   }
   async findbyidhoadon(id_hoa_don_do_an: number) {
-    return await DB.sequelize.query(
-      'SELECT * FROM ' +
-        this.modelName() +
-        ' where is_delete = 0 and id_hoa_don_do_an = ' +
-        id_hoa_don_do_an,
-      {
-        type: QueryTypes.SELECT,
-      },
-    )
+    return await DB.sequelize.query('call list_hoa_don_chi_tiet(' + id_hoa_don_do_an + ')', {
+      type: QueryTypes.CALL,
+    })
   }
 
   async findbyidhoadondoan(id_hoa_don_do_an: number, id_do_an: number) {

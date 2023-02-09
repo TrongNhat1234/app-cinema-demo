@@ -114,8 +114,8 @@ export class HoaDonChiTietsController extends BaseController {
   async deleteHoaDonChiTiet(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const data = {
-        id_hoa_don_do_an: parseInt(req.query.id_hoa_don_do_an, 10),
-        id_do_an: parseInt(req.query.id_do_an, 10),
+        id_hoa_don_do_an: parseInt(req.body.id_hoa_don_do_an, 10),
+        id_do_an: parseInt(req.body.id_do_an, 10),
       }
       const HoaDonChiTiet = await this.HoaDonChiTietRepository.deleteHoaDonChiTiet(data)
 

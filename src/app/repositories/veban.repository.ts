@@ -54,6 +54,13 @@ class VeBanRepository extends BaseRepository<VeBan> implements VeBanRepositoryIn
     return a
   }
 
+  async findTheLoaiPhimIdPhim(id_phim: number) {
+    const a = await DB.sequelize.query('call the_loai_the_id_phim(' + id_phim + ')', {
+      type: QueryTypes.CALL,
+    })
+    return a
+  }
+
   async checkTrangThai(id_suat_chieu: number, id_ghe_ngoi: number) {
     return await DB.sequelize.query(
       'SELECT*FROM ' +
@@ -68,15 +75,9 @@ class VeBanRepository extends BaseRepository<VeBan> implements VeBanRepositoryIn
     )
   }
   async findByIdKhachHang(id_khach_hang: number) {
-    return await DB.sequelize.query(
-      'SELECT*FROM ' +
-        this.modelName() +
-        ' where is_delete = 0 and id_khach_hang = ' +
-        id_khach_hang,
-      {
-        type: QueryTypes.SELECT,
-      },
-    )
+    return await DB.sequelize.query('call ve_ban_cua_khach_hang(' + id_khach_hang + ')', {
+      type: QueryTypes.CALL,
+    })
   }
 
   async xacNhanThongTinVe(id_suat_chieu: number, id_ghe_ngoi: number) {

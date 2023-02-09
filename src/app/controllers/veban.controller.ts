@@ -85,7 +85,31 @@ export class VeBansController extends BaseController {
       )
       const id_khach_hang = kh[0].id
       const findAllVeBansData = await this.VeBanRepository.findByIdKhachHang(id_khach_hang)
-      return this.setCode(200).setData(findAllVeBansData).setMessage('Success').responseSuccess(res)
+      const data = []
+      for (let i = 0; i < findAllVeBansData.length; i++) {
+        const theloai = await this.VeBanRepository.findTheLoaiPhimIdPhim(
+          findAllVeBansData[i].id_phim,
+        )
+        const theloai2 = []
+        for (let j = 0; j < theloai.length; j++) {
+          theloai2.push(theloai[j].ten_the_loai)
+        }
+        console.log(theloai2)
+        const data1 = {
+          id: findAllVeBansData[i].id,
+          id_phim: findAllVeBansData[i].id_phim,
+          ten_phim: findAllVeBansData[i].ten_phim,
+          thoi_luong_phim: findAllVeBansData[i].thoi_luong_phim,
+          day_so: findAllVeBansData[i].day_so,
+          hang_so: findAllVeBansData[i].hang_so,
+          gio_bat_dau: findAllVeBansData[i].gio_bat_dau,
+          gio_ket_thuc: findAllVeBansData[i].gio_ket_thuc,
+          ten_dinh_dang: findAllVeBansData[i].ten_dinh_dang,
+          ten_the_loai: theloai2,
+        }
+        data.push(data1)
+      }
+      return this.setCode(200).setData(data).setMessage('Success').responseSuccess(res)
     } catch (error) {
       return this.setData({})
         .setCode(error?.status || 500)

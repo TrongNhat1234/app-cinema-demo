@@ -35,23 +35,21 @@ class SuatChieuRepository
 
   async createSuatChieu(object: any) {
     const a = await DB.sequelize.query(
-      'INSERT INTO ' +
-        this.modelName() +
-        " (gio_bat_dau, gio_ket_thuc,id_phim,id_phong_chieu,id_dinh_dang_phim,ngay_chieu,created_at,updated_at) VALUES ('" +
+      "call them_suatchieu('" +
         object.gio_bat_dau +
         "', '" +
         object.gio_ket_thuc +
         "', " +
-        object.id_phim +
-        ', ' +
         object.id_phong_chieu +
         ', ' +
         object.id_dinh_dang_phim +
+        ', ' +
+        object.id_phim +
         ", '" +
         object.ngay_chieu +
-        "',NOW(),NOW())",
+        "')",
       {
-        type: QueryTypes.INSERT,
+        type: QueryTypes.CALL,
       },
     )
     return a

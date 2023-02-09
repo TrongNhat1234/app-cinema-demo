@@ -76,11 +76,17 @@ export class SuatChieusController extends BaseController {
       const data: CreateDto = req.body
       console.log(data)
       const suatchieu = await this.SuatChieuRepository.createSuatChieu(data)
-
-      return this.setCode(200)
-        .setData(data)
-        .setMessage('Create suatchieus successfully')
-        .responseSuccess(res)
+      if (suatchieu[0].Message == 'Them suat chieu thanh cong') {
+        return this.setCode(200)
+          .setData(data)
+          .setMessage('Create suatchieus successfully')
+          .responseSuccess(res)
+      } else {
+        return this.setCode(500)
+          .setData({})
+          .setMessage('Khung gio nay tai phong chieu nay ngay nay da co')
+          .responseSuccess(res)
+      }
     } catch (error) {
       return this.setData({})
         .setCode(error?.status || 500)

@@ -74,6 +74,26 @@ export class VeBansController extends BaseController {
     }
   }
 
+  @UseBefore(AuthMiddleware)
+  @Get('/vebancuakhachhangs')
+  async veBanCuaKhachHang(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const accessToken = req.headers.authorization.split('Bearer ')[1].trim()
+      const so_dien_thoai = await jwt.verify(accessToken, env.app.jwt_secret as jwt.Secret)
+      const kh = await new KhachHangRepository(KhachHang).findBySoDienThoai(
+        so_dien_thoai.so_dien_thoai,
+      )
+      const id_khach_hang = kh[0].id
+      const findAllVeBansData = await this.VeBanRepository.findByIdKhachHang(id_khach_hang)
+      return this.setCode(200).setData(findAllVeBansData).setMessage('Success').responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
   @Get('/xacnhanthongtinve')
   async xacNhanThongTinVe(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {

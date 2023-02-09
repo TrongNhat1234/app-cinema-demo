@@ -67,6 +67,17 @@ class VeBanRepository extends BaseRepository<VeBan> implements VeBanRepositoryIn
       },
     )
   }
+  async findByIdKhachHang(id_khach_hang: number) {
+    return await DB.sequelize.query(
+      'SELECT*FROM ' +
+        this.modelName() +
+        ' where is_delete = 0 and id_khach_hang = ' +
+        id_khach_hang,
+      {
+        type: QueryTypes.SELECT,
+      },
+    )
+  }
 
   async xacNhanThongTinVe(id_suat_chieu: number, id_ghe_ngoi: number) {
     return await DB.sequelize.query(

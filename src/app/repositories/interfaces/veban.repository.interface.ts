@@ -7,4 +7,5 @@ export interface VeBanRepositoryInterface<M extends Model> extends BaseRepositor
   xacNhanThongTinVe(id_suat_chieu: number, id_ghe_ngoi: number)
   ChonGheKhachHang(id_suat_chieu: number, id_ghe_ngoi: number, id_khach_hang: number)
   ChonGheNhanVien(id_suat_chieu: number, id_ghe_ngoi: number, id_nhan_vien: number)
+  findByIdKhachHang(id_khach_hang: number)
 }

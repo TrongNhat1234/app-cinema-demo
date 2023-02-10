@@ -68,7 +68,7 @@ export class HoaDonDoAnsController extends BaseController {
       console.log(doanhThu)
       let sum = 0
       for (let i = 0; i < doanhThu.length; i++) {
-        sum = sum + doanhThu[i].doanh_thu
+        sum = sum + doanhThu[i].tongtien
       }
       const data2 = [
         doanhThu,

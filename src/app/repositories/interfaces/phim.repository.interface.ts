@@ -6,4 +6,5 @@ export interface PhimRepositoryInterface<M extends Model> extends BaseRepository
   getPhimDangChieu()
   getPhimSapChieu()
   getPhimSuatChieuNgay(id_phim: number, ngay_chieu: Date)
+  doanhThuPhim(object: any)
 }

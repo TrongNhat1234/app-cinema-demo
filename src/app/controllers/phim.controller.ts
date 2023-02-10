@@ -52,6 +52,32 @@ export class PhimsController extends BaseController {
     }
   }
 
+  @Get('/doanhthuphim')
+  async doanhThu(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const data = req.body
+      const doanhThu = await this.PhimRepository.doanhThuPhim(data)
+      console.log(doanhThu)
+      let sum = 0
+      for (let i = 0; i < doanhThu.length; i++) {
+        sum = sum + doanhThu[i].doanh_thu
+      }
+      const data2 = [
+        doanhThu,
+        {
+          tong_doanh_thu: sum,
+        },
+      ]
+
+      return this.setCode(200).setData(data2).setMessage('Success').responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
   @Get('/listphimdangchieus')
   async getDangChieu(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {

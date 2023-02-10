@@ -47,6 +47,18 @@ class HoaDonDoAnRepository
     )
     return a
   }
+
+  async doanhThuDoAn(object: any) {
+    const hddoans = await DB.sequelize.query(
+      "call bao_cao_doanhthu_doan_ngay('" +
+        object.ngay_bat_dau +
+        "',' " +
+        object.ngay_ket_thuc +
+        "')",
+      { type: QueryTypes.CALL },
+    )
+    return hddoans
+  }
 }
 
 export default HoaDonDoAnRepository

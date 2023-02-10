@@ -64,6 +64,19 @@ class PhimRepository extends BaseRepository<Phim> implements PhimRepositoryInter
     )
     return suatchieus
   }
+  async doanhThuPhim(object: any) {
+    const phims = await DB.sequelize.query(
+      "call bao_cao_doanhthu_phim('" +
+        object.ngay_bat_dau +
+        "',' " +
+        object.ngay_ket_thuc +
+        "'," +
+        object.id_phim +
+        ' )',
+      { type: QueryTypes.CALL },
+    )
+    return phims
+  }
 }
 
 export default PhimRepository

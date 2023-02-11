@@ -169,16 +169,13 @@ export class VeBansController extends BaseController {
           id_suat_chieu,
           listghe[i],
         )
-
+        tongTien += findAllVeBansData[0].gia_ve
         if (i == 0) {
           for (let i2 = 0; i2 < findAllVeBansData.length; i2++) {
             a.push(findAllVeBansData[i2].ten_the_loai)
-            console.log(findAllVeBansData[i2])
-            tongTien += findAllVeBansData[i2].gia_ve
           }
         }
         const b = []
-        console.log(findAllVeBansData[0].hang_so)
         b.push(findAllVeBansData[0].hang_so)
         b.push(findAllVeBansData[0].day_so)
         ghe.push(b)
@@ -197,7 +194,6 @@ export class VeBansController extends BaseController {
           }
         }
       }
-      console.log(data)
       return this.setCode(200).setData(data).setMessage('Success').responseSuccess(res)
     } catch (error) {
       return this.setData({})

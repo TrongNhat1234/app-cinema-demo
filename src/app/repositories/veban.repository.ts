@@ -23,7 +23,7 @@ class VeBanRepository extends BaseRepository<VeBan> implements VeBanRepositoryIn
     const a = await DB.sequelize.query(
       'UPDATE ' +
         this.modelName() +
-        ' set updated_at = NOW(),trang_thai = 1 where id_suat_chieu = ' +
+        ' set updated_at = NOW(),trang_thai = 1, ngay_ban = NOW() where id_suat_chieu = ' +
         object.id_suat_chieu +
         ' and id_ghe_ngoi = ' +
         object.id_ghe_ngoi,

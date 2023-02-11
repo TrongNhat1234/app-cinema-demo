@@ -156,6 +156,7 @@ export class VeBansController extends BaseController {
   @Get('/xacnhanthongtinve2')
   async xacNhanThongTinVe2(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
+      let tongTien = 0
       let data = {}
       console.log(data)
       const list_id_ghe_ngoi = req.query.id_ghe_ngoi
@@ -168,9 +169,12 @@ export class VeBansController extends BaseController {
           id_suat_chieu,
           listghe[i],
         )
+
         if (i == 0) {
           for (let i2 = 0; i2 < findAllVeBansData.length; i2++) {
             a.push(findAllVeBansData[i2].ten_the_loai)
+            console.log(findAllVeBansData[i2])
+            tongTien += findAllVeBansData[i2].gia_ve
           }
         }
         const b = []
@@ -189,6 +193,7 @@ export class VeBansController extends BaseController {
             gio_bat_dau: findAllVeBansData[0].gio_bat_dau,
             gio_ket_thuc: findAllVeBansData[0].gio_ket_thuc,
             thoi_luong_phim: findAllVeBansData[0].thoi_luong_phim,
+            tongTien: tongTien,
           }
         }
       }

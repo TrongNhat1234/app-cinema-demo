@@ -107,6 +107,19 @@ class HoaDonChiTietRepository
     )
     return a
   }
+
+  async deleteHoaDonChiTietTheoIdDoAn(id_hoa_don_do_an: number) {
+    const a = await DB.sequelize.query(
+      'UPDATE ' +
+        this.modelName() +
+        ' set updated_at = NOW(),is_delete = 1 where id_hoa_don_do_an = ' +
+        id_hoa_don_do_an,
+      {
+        type: QueryTypes.UPDATE,
+      },
+    )
+    return a
+  }
 }
 
 export default HoaDonChiTietRepository

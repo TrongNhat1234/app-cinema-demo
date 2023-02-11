@@ -1,6 +1,10 @@
+import { HoaDonChiTiet } from '@models/entities/hoadonchitiet.entity'
 import HoaDonDoAn from '@models/entities/hoadondoan.entity'
+
 import { CreateDto } from '../../dtos/hoadondoan.dto'
 import NhanVienRepository from '@repositories/nhanvien.repository'
+import HoaDonChiTietRepository from '@repositories/hoadonchitiet.repository'
+
 import { NhanVien } from '@models/entities/nhanvien.entity'
 import jwt from 'jsonwebtoken'
 
@@ -144,7 +148,9 @@ export class HoaDonDoAnsController extends BaseController {
     try {
       const id = req.body.id
       const HoaDonDoAn = await this.HoaDonDoAnRepository.deleteById(id)
-
+      const DleteHoaDonChiTiet = await new HoaDonChiTietRepository(
+        HoaDonChiTiet,
+      ).deleteHoaDonChiTietTheoIdDoAn(id)
       return this.setCode(200)
         .setData(id)
         .setMessage('delete hoa don do an successfully')

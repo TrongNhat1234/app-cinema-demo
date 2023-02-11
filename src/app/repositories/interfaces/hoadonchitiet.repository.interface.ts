@@ -8,4 +8,5 @@ export interface HoaDonChiTietRepositoryInterface<M extends Model> extends BaseR
   updateHoaDonChiTiet(object: any)
   updateHoaDonChiTietCreate(object: any)
   deleteHoaDonChiTiet(object: any)
+  deleteHoaDonChiTietTheoIdDoAn(id_hoa_don_do_an: number)
 }

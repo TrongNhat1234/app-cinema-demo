@@ -53,6 +53,20 @@ export class SuatChieusController extends BaseController {
     }
   }
 
+  @Get('/')
+  async getSuatChieuTheoIdPhim(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const id_phim: number = req.query.id_phim
+      const findAllSuatChieusData = await this.SuatChieuRepository.suatChieuTheoIdPhim(id_phim)
+      return this.setCode(200)
+        .setData(findAllSuatChieusData)
+        .setMessage('Success')
+        .responseSuccess(res)
+    } catch (error) {
+      return this.setMessage('Error').responseErrors(res)
+    }
+  }
+
   @Get('/listngay')
   async getSuatChieuTheoNgay(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {

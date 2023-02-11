@@ -75,6 +75,13 @@ class SuatChieuRepository
     )
     return a
   }
+  async suatChieuTheoIdPhim(id_phim: number) {
+    const phims = await DB.sequelize.query(
+      'SELECT * FROM ' + this.modelName() + ' where is_delete=0 and id_phim=' + id_phim,
+      { type: QueryTypes.SELECT },
+    )
+    return phims
+  }
 }
 
 export default SuatChieuRepository

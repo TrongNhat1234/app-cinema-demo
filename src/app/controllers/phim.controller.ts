@@ -141,9 +141,9 @@ export class PhimsController extends BaseController {
       const data: CreateDto = req.body
       console.log(data)
       const Phim = await this.PhimRepository.createPhim(data)
-
+      const data2 = await this.PhimRepository.PhimGanNhat()
       return this.setCode(200)
-        .setData(data)
+        .setData(data2)
         .setMessage('Create phims successfully')
         .responseSuccess(res)
     } catch (error) {

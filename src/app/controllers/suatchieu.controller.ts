@@ -58,6 +58,7 @@ export class SuatChieusController extends BaseController {
     try {
       const id_phim: number = req.query.id_phim
       const findAllSuatChieusData = await this.SuatChieuRepository.suatChieuTheoIdPhim(id_phim)
+      console.log(findAllSuatChieusData)
       return this.setCode(200)
         .setData(findAllSuatChieusData)
         .setMessage('Success')

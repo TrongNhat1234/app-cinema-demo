@@ -63,7 +63,7 @@ export class HoaDonDoAnsController extends BaseController {
   @Get('/doanhthudoan')
   async doanhThu(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const data = req.body
+      const data = req.query
       const doanhThu = await this.HoaDonDoAnRepository.doanhThuDoAn(data)
       console.log(doanhThu)
       let sum = 0

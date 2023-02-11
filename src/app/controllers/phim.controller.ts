@@ -57,7 +57,7 @@ export class PhimsController extends BaseController {
   @Get('/doanhthuphim')
   async doanhThu(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const data = req.body
+      const data = req.query
       const doanhThu = await this.PhimRepository.doanhThuPhim(data)
       console.log(doanhThu)
       let sum = 0

@@ -30,6 +30,19 @@ class TheLoaiPhimRepository
       },
     )
   }
+
+  async createTheLoaiPhim(id_phim: number, id_the_loai: number) {
+    return await DB.sequelize.query(
+      'insert into theloaiphims (id_phim,id_the_loai) values (' +
+        id_phim +
+        ' , ' +
+        id_the_loai +
+        ')',
+      {
+        type: QueryTypes.INSERT,
+      },
+    )
+  }
 }
 
 export default TheLoaiPhimRepository

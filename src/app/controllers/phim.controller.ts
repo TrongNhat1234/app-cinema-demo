@@ -1,3 +1,5 @@
+import TheLoaiPhimRepository from '@repositories/theloaiphim.repository'
+import { TheLoaiPhim } from '@models/entities/theloaiphim.entity'
 import { Phim } from '@models/entities/phim.entity'
 import { isEmpty } from './../../common/utils/util'
 
@@ -139,9 +141,20 @@ export class PhimsController extends BaseController {
   async createPhim(@Req() req: Request, @Res() res: Response, next: NextFunction) {
     try {
       const data: CreateDto = req.body
-      console.log(data)
-      const Phim = await this.PhimRepository.createPhim(data)
-      const data2 = await this.PhimRepository.PhimGanNhat()
+      const data2 = {
+        ten_phim: data.ten_phim,
+        thoi_luong_phim: data.thoi_luong_phim,
+        gioi_han_tuoi: data.gioi_han_tuoi,
+        ngay_cong_chieu: data.ngay_cong_chieu,
+      }
+      const Phim = await this.PhimRepository.createPhim(data2)
+      const data3 = await this.PhimRepository.PhimGanNhat()
+      for (let i = 0; i < data.id_the_loai.length; i++) {
+        await new TheLoaiPhimRepository(TheLoaiPhim).createTheLoaiPhim(
+          data3[0].id,
+          data.id_the_loai[i],
+        )
+      }
       return this.setCode(200)
         .setData(data2)
         .setMessage('Create phims successfully')

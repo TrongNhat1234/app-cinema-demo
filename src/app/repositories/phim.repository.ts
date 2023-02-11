@@ -77,6 +77,20 @@ class PhimRepository extends BaseRepository<Phim> implements PhimRepositoryInter
     )
     return phims
   }
+
+  async tyLeBanVeCuaPhim(object: any) {
+    const phims = await DB.sequelize.query(
+      "call tyle_vemua_phim_thoigian('" +
+        object.ngay_bat_dau +
+        "',' " +
+        object.ngay_ket_thuc +
+        "'," +
+        object.id_phim +
+        ' )',
+      { type: QueryTypes.CALL },
+    )
+    return phims
+  }
 }
 
 export default PhimRepository

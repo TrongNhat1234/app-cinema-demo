@@ -78,6 +78,20 @@ export class PhimsController extends BaseController {
     }
   }
 
+  @Get('/tyledoanhthuphim')
+  async tyLeDoanhThu(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const data = req.body
+      const doanhThu = await this.PhimRepository.tyLeBanVeCuaPhim(data)
+      return this.setCode(200).setData(doanhThu).setMessage('Success').responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
   @Get('/listphimdangchieus')
   async getDangChieu(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {

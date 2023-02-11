@@ -58,7 +58,17 @@ export class PhimsController extends BaseController {
   async doanhThu(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
       const data = req.query
-      const doanhThu = await this.PhimRepository.doanhThuPhim(data)
+      let data1
+      if (data.id_phim == null) {
+        data1 = {
+          ngay_bat_dau: data.ngay_bat_dau,
+          ngay_ket_thuc: data.ngay_ket_thuc,
+          id_phim: 'null',
+        }
+      } else {
+        data1 = data
+      }
+      const doanhThu = await this.PhimRepository.doanhThuPhim(data1)
       console.log(doanhThu)
       let sum = 0
       for (let i = 0; i < doanhThu.length; i++) {
@@ -83,8 +93,19 @@ export class PhimsController extends BaseController {
   @Get('/tyledoanhthuphim')
   async tyLeDoanhThu(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
-      const data = req.body
-      const doanhThu = await this.PhimRepository.tyLeBanVeCuaPhim(data)
+      const data = req.query
+      let data1
+      if (data.id_phim == null) {
+        data1 = {
+          ngay_bat_dau: data.ngay_bat_dau,
+          ngay_ket_thuc: data.ngay_ket_thuc,
+          id_phim: 'null',
+        }
+      } else {
+        data1 = data
+      }
+
+      const doanhThu = await this.PhimRepository.tyLeBanVeCuaPhim(data1)
       return this.setCode(200).setData(doanhThu).setMessage('Success').responseSuccess(res)
     } catch (error) {
       return this.setData({})

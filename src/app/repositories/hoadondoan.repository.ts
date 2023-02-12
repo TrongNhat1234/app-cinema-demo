@@ -32,19 +32,10 @@ class HoaDonDoAnRepository
     return hoaDon
   }
 
-  async createHoaDonDoAn(id_nhan_vien: number, giam_gia: number) {
-    const a = await DB.sequelize.query(
-      'INSERT INTO ' +
-        this.modelName() +
-        ' ( id_nhan_vien,giam_gia,created_at,updated_at) VALUES (' +
-        id_nhan_vien +
-        ',' +
-        giam_gia +
-        ',NOW(),NOW())',
-      {
-        type: QueryTypes.INSERT,
-      },
-    )
+  async createHoaDonDoAn(id_nhan_vien: number) {
+    const a = await DB.sequelize.query('call them_hoa_don_do_an(' + id_nhan_vien + ')', {
+      type: QueryTypes.CALL,
+    })
     return a
   }
 

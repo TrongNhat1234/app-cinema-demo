@@ -119,12 +119,8 @@ export class HoaDonDoAnsController extends BaseController {
       if (!isEmpty(nv)) {
         const data: CreateDto = {
           id_nhan_vien: nv[0].id,
-          giam_gia: req.body.giam_gia,
         }
-        const HoaDonDoAn = await this.HoaDonDoAnRepository.createHoaDonDoAn(
-          data.id_nhan_vien,
-          data.giam_gia,
-        )
+        const HoaDonDoAn = await this.HoaDonDoAnRepository.createHoaDonDoAn(data.id_nhan_vien)
 
         const data2 = await this.HoaDonDoAnRepository.hoaDonVuaTao()
         console.log('aaa' + data2)

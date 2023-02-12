@@ -9,4 +9,5 @@ export interface PhimRepositoryInterface<M extends Model> extends BaseRepository
   doanhThuPhim(object: any)
   tyLeBanVeCuaPhim(object: any)
   PhimGanNhat()
+  timKiemPhimTheoTen(ten_phim: string)
 }

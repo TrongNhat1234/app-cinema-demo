@@ -74,6 +74,14 @@ class PhimRepository extends BaseRepository<Phim> implements PhimRepositoryInter
     )
     return suatchieus
   }
+
+  async timKiemPhimTheoTen(ten_phim: string) {
+    const suatchieus = await DB.sequelize.query("call timkiem_phim_theo_ten('" + ten_phim + "')", {
+      type: QueryTypes.CALL,
+    })
+    return suatchieus
+  }
+
   async doanhThuPhim(object: any) {
     const phims = await DB.sequelize.query(
       "call bao_cao_doanhthu_phim('" +

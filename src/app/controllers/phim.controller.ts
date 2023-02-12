@@ -54,6 +54,23 @@ export class PhimsController extends BaseController {
     }
   }
 
+  @Get('/timkiemtheotenphim')
+  async timKiemTheoTenPhim(@Req() req: any, @Res() res: any, next: NextFunction) {
+    try {
+      const ten_phim = req.query.ten_phim
+      const findAllTheLoaisData = await this.PhimRepository.timKiemPhimTheoTen(ten_phim)
+      return this.setCode(200)
+        .setData(findAllTheLoaisData)
+        .setMessage('Success')
+        .responseSuccess(res)
+    } catch (error) {
+      return this.setData({})
+        .setCode(error?.status || 500)
+        .setMessage('Error')
+        .responseErrors(res)
+    }
+  }
+
   @Get('/doanhthuphim')
   async doanhThu(@Req() req: any, @Res() res: any, next: NextFunction) {
     try {
